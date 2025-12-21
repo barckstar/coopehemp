@@ -11,7 +11,7 @@ const Products = () => {
             name: "CBD Pre-rolls (5 pack)",
             description: "Flores de cáñamo premium seleccionadas a mano, roladas en papel orgánico. Experiencia suave y natural.",
             price: "$15.00",
-            image: "/src/assets/product-prerolls.jpg",
+            image: "/productos/product-prerolls.jpg",
             category: "Fumables"
         },
         {
@@ -19,7 +19,7 @@ const Products = () => {
             name: "Bálsamo Calmante CBD",
             description: "Alivio tópico profundo para músculos y articulaciones. Formulado con cera de abeja y aceites esenciales.",
             price: "$25.00",
-            image: "/src/assets/product-cbd-balm.jpg",
+            image: "/productos/product-cbd-balm.jpg",
             category: "Bienestar"
         },
         {
@@ -27,7 +27,7 @@ const Products = () => {
             name: "Té de Cáñamo Premium",
             description: "Infusión relajante rica en cannabinoides no psicoactivos. Ideal para reducir el estrés y mejorar el sueño.",
             price: "$45.00",
-            image: "/src/assets/product-hump-oil-tea.jpg",
+            image: "/productos/product-hump-oil-tea.jpg",
             category: "Bebidas"
         },
         {
@@ -35,7 +35,7 @@ const Products = () => {
             name: "Crema Facial Anti-edad",
             description: "Hidratación profunda con poder antioxidante. Revitaliza tu piel con lo mejor de la naturaleza.",
             price: "$30.00",
-            image: "/src/assets/product-beauty-cream.jpg",
+            image: "/productos/product-beauty-cream.jpg",
             category: "Belleza"
         },
         {
@@ -43,7 +43,7 @@ const Products = () => {
             name: "Cookies Artesanales CBD",
             description: "Deliciosas galletas horneadas con harina de cáñamo y chispas de chocolate. El snack saludable perfecto.",
             price: "$12.00",
-            image: "/src/assets/product-cookies.jpg",
+            image: "/productos/product-cookies.jpg",
             category: "Comestibles"
         }
     ];
@@ -68,7 +68,7 @@ const Products = () => {
             {/* Hero Section */}
             <div className="relative bg-green-900 text-white overflow-hidden">
                 <div className="absolute inset-0">
-                    <div className="absolute inset-0 bg-[url('/src/assets/hemp-field.jpg')] bg-cover bg-center opacity-20 mix-blend-overlay"></div>
+                    <div className="absolute inset-0 bg-[url('/hemp-field.jpg')] bg-cover bg-center opacity-20 mix-blend-overlay"></div>
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent to-green-900/90"></div>
                 </div>
 
@@ -150,7 +150,7 @@ const Products = () => {
                         variants={item}
                         className="bg-green-900 rounded-3xl p-8 flex flex-col justify-center items-center text-center text-white relative overflow-hidden min-h-[400px]"
                     >
-                        <div className="absolute inset-0 bg-[url('/src/assets/hemp-leaves-vertical.jpg')] bg-cover bg-center opacity-10"></div>
+                        <div className="absolute inset-0 bg-[url('/hemp-leaves-vertical.jpg')] bg-cover bg-center opacity-10"></div>
                         <div className="relative z-10 space-y-6">
                             <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto backdrop-blur-sm">
                                 <Leaf className="w-8 h-8 text-green-300" />

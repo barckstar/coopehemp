@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
 import { Heart, Sprout, Users, Rocket, Award, CheckCircle, ArrowRight } from 'lucide-react';
-import handsImage from '../../assets/hemp-hands-soil.jpg';
-import fiberImage from '../../assets/hemp-fiber-roll.jpg';
-import leavesImage from '../../assets/hemp-leaves-vertical.jpg';
-import gummiesImage from '../../assets/hemp-gummies.jpg';
+// Images are now in public folder
+const handsImage = "/hemp-hands-soil.jpg";
+const fiberImage = "/hemp-fiber-roll.jpg";
+const leavesImage = "/hemp-leaves-vertical.jpg";
+const gummiesImage = "/hemp-gummies.jpg";
 
 const fadeIn = {
     initial: { opacity: 0, y: 20 },

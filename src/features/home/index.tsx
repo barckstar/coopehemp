@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Leaf, Droplet, Sun, Users } from 'lucide-react';
-import fieldImage from '../../assets/hemp-field.jpg';
-import oilImage from '../../assets/hemp-oil.jpg';
-import productImage from '../../assets/hemp-product.jpg';
+const fieldImage = "/hemp-field.jpg";
+const oilImage = "/hemp-oil.jpg";
+const productImage = "/productos/hemp-product.jpg";
 // import logoImage from '../../assets/logo.png'; // Used in header/footer mostly
 
 const fadeInUp = {

@@ -10,7 +10,7 @@ const Blog = () => {
             id: 1,
             title: "Inicios de la Siembra",
             excerpt: "Descubre cómo nuestra comunidad se une para dar comienzo a una nueva temporada de cultivo, respetando los ciclos de la naturaleza.",
-            image: "/src/assets/blog-hands-soil.jpg",
+            image: "/blog/blog-hands-soil.jpg",
             category: "Comunidad",
             date: "15 Dic, 2024",
             author: "María Campos"
@@ -19,7 +19,7 @@ const Blog = () => {
             id: 2,
             title: "Beneficios del Cáñamo",
             excerpt: "Exploramos las múltiples propiedades del cáñamo y cómo puede revolucionar la industria textil, medicinal y alimentaria.",
-            image: "/src/assets/blog-hemp-leaves.jpg",
+            image: "/blog/blog-hemp-leaves.jpg",
             category: "Educación",
             date: "10 Dic, 2024",
             author: "Dr. Roberto Solís"
@@ -28,7 +28,7 @@ const Blog = () => {
             id: 3,
             title: "Innovación en Cultivos",
             excerpt: "Nuestros nuevos invernaderos están equipados con tecnología de punta para maximizar el rendimiento de manera sostenible.",
-            image: "/src/assets/blog-greenhouse.jpg",
+            image: "/blog/blog-greenhouse.jpg",
             category: "Tecnología",
             date: "05 Dic, 2024",
             author: "Ing. Carlos Ruiz"
@@ -37,7 +37,7 @@ const Blog = () => {
             id: 4,
             title: "Cultivo Indoor: El Futuro",
             excerpt: "Ventajas y desafíos del cultivo en interiores. Cómo logramos calidad premium controlando cada aspecto del ambiente.",
-            image: "/src/assets/blog-indoor-grow.jpg",
+            image: "/blog/blog-indoor-grow.jpg",
             category: "Cultivo",
             date: "28 Nov, 2024",
             author: "Ana Vega"

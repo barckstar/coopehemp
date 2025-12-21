@@ -25,7 +25,7 @@ const Contact = () => {
             <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0">
                     <img
-                        src="/src/assets/hemp-field-sunrise.jpg"
+                        src="/hemp-field-sunrise.jpg"
                         alt="Sunrise over hemp field"
                         className="w-full h-full object-cover"
                     />
@@ -185,7 +185,7 @@ const Contact = () => {
                             className="relative rounded-3xl overflow-hidden group h-[400px]"
                         >
                             <img
-                                src="/src/assets/hands-soil-group.jpg"
+                                src="/hands-soil-group.jpg"
                                 alt="Community planting together"
                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                             />
