@@ -1,9 +1,12 @@
 import { motion } from 'framer-motion';
 import { ShoppingBag, Star, ArrowRight, Leaf } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useTranslation } from '../../i18n/LanguageContext';
 import useScrollToTop from '../../shared/hooks/useScrollToTop';
 
 const Products = () => {
     useScrollToTop();
+    const { t } = useTranslation();
 
     const products = [
         {
@@ -50,12 +53,7 @@ const Products = () => {
 
     const container = {
         hidden: { opacity: 0 },
-        show: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1
-            }
-        }
+        show: { opacity: 1, transition: { staggerChildren: 0.1 } }
     };
 
     const item = {
@@ -65,11 +63,11 @@ const Products = () => {
 
     return (
         <div className="min-h-screen bg-neutral-50 pb-20">
-            {/* Hero Section */}
+            {/* Hero */}
             <div className="relative bg-green-900 text-white overflow-hidden">
                 <div className="absolute inset-0">
-                    <div className="absolute inset-0 bg-[url('/hemp-field.jpg')] bg-cover bg-center opacity-20 mix-blend-overlay"></div>
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-green-900/90"></div>
+                    <div className="absolute inset-0 bg-[url('/hemp-field.jpg')] bg-cover bg-center opacity-20 mix-blend-overlay" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-green-900/90" />
                 </div>
 
                 <div className="relative z-10 max-w-7xl mx-auto px-4 py-24 md:py-32 text-center">
@@ -80,12 +78,11 @@ const Products = () => {
                     >
                         <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-green-300 text-sm font-medium mb-6">
                             <Leaf className="w-4 h-4" />
-                            100% Orgánico & Sostenible
+                            {t('products.hero_badge')}
                         </div>
-                        <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">Catalogo Coopehemp</h1>
+                        <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">{t('products.hero_title')}</h1>
                         <p className="text-xl md:text-2xl text-green-100 max-w-3xl mx-auto font-light leading-relaxed">
-                            Descubre el poder del cáñamo en productos diseñados para tu bienestar.
-                            Calidad premium, cultivada con respeto por la tierra.
+                            {t('products.hero_sub')}
                         </p>
                     </motion.div>
                 </div>
@@ -121,9 +118,7 @@ const Products = () => {
                                     <h3 className="text-2xl font-bold text-neutral-900 group-hover:text-green-800 transition-colors">
                                         {product.name}
                                     </h3>
-                                    <div className="flex flex-col items-end">
-                                        <span className="text-lg font-bold text-green-700">{product.price}</span>
-                                    </div>
+                                    <span className="text-lg font-bold text-green-700 shrink-0 ml-2">{product.price}</span>
                                 </div>
 
                                 <p className="text-neutral-600 mb-6 leading-relaxed flex-grow">
@@ -138,30 +133,31 @@ const Products = () => {
                                     </div>
                                     <button className="flex items-center gap-2 bg-neutral-900 text-white px-5 py-2.5 rounded-xl font-medium hover:bg-green-700 transition-all active:scale-95">
                                         <ShoppingBag className="w-4 h-4" />
-                                        <span>Detalles</span>
+                                        <span>{t('products.details_btn')}</span>
                                     </button>
                                 </div>
                             </div>
                         </motion.div>
                     ))}
 
-                    {/* Call to Action Card for Wholesale/Distributors */}
+                    {/* Wholesale CTA card */}
                     <motion.div
                         variants={item}
                         className="bg-green-900 rounded-3xl p-8 flex flex-col justify-center items-center text-center text-white relative overflow-hidden min-h-[400px]"
                     >
-                        <div className="absolute inset-0 bg-[url('/hemp-leaves-vertical.jpg')] bg-cover bg-center opacity-10"></div>
+                        <div className="absolute inset-0 bg-[url('/hemp-leaves-vertical.jpg')] bg-cover bg-center opacity-10" />
                         <div className="relative z-10 space-y-6">
                             <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto backdrop-blur-sm">
                                 <Leaf className="w-8 h-8 text-green-300" />
                             </div>
-                            <h3 className="text-3xl font-bold">¿Mayorista?</h3>
-                            <p className="text-green-100 max-w-sm mx-auto">
-                                Únete a nuestra red de distribuidores y lleva los mejores productos de cáñamo a tus clientes.
-                            </p>
-                            <button className="inline-flex items-center gap-2 bg-white text-green-900 px-6 py-3 rounded-xl font-bold hover:bg-green-50 transition-colors">
-                                Contáctanos <ArrowRight className="w-4 h-4" />
-                            </button>
+                            <h3 className="text-3xl font-bold">{t('products.wholesale_title')}</h3>
+                            <p className="text-green-100 max-w-sm mx-auto">{t('products.wholesale_desc')}</p>
+                            <Link
+                                to="/contacto"
+                                className="inline-flex items-center gap-2 bg-white text-green-900 px-6 py-3 rounded-xl font-bold hover:bg-green-50 transition-colors"
+                            >
+                                {t('products.wholesale_btn')} <ArrowRight className="w-4 h-4" />
+                            </Link>
                         </div>
                     </motion.div>
                 </motion.div>
