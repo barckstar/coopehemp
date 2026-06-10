@@ -3,6 +3,7 @@ import { Heart, Sprout, Users, Rocket, Award, CheckCircle, ArrowRight } from 'lu
 import { Link } from 'react-router-dom';
 import { useTranslation } from '../../i18n/LanguageContext';
 import useScrollToTop from '../../shared/hooks/useScrollToTop';
+import { useSEO } from '../../shared/hooks/useSEO';
 
 const handsImage = "/hemp-hands-soil.jpg";
 const fiberImage = "/hemp-fiber-roll.jpg";
@@ -16,9 +17,35 @@ const fadeIn = {
     transition: { duration: 0.6 }
 };
 
+const ABOUT_LD = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    '@id': 'https://coopehemp.cr/about#webpage',
+    name: 'Sobre Nosotros — CoopeHemp R.L.',
+    url: 'https://coopehemp.cr/about',
+    description: 'Conoce la historia, misión, valores y equipo de CoopeHemp R.L., la cooperativa costarricense pionera en producción sostenible de cáñamo.',
+    isPartOf: { '@id': 'https://coopehemp.cr/#website' },
+    about: { '@id': 'https://coopehemp.cr/#organization' },
+    breadcrumb: {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://coopehemp.cr/' },
+            { '@type': 'ListItem', position: 2, name: 'Sobre Nosotros', item: 'https://coopehemp.cr/about' },
+        ],
+    },
+};
+
 const About = () => {
     useScrollToTop();
     const { t } = useTranslation();
+
+    useSEO({
+        title: 'Sobre Nosotros — Nuestra Historia y Misión',
+        description: 'Conoce CoopeHemp R.L.: más de 50 productores costarricenses comprometidos con el cáñamo 100% orgánico. Misión, valores, pilares estratégicos y equipo.',
+        path: '/about',
+        image: '/hemp-hands-soil.jpg',
+        structuredData: ABOUT_LD,
+    });
 
     const values = [
         { titleKey: 'about.v1_title', descKey: 'about.v1_desc' },

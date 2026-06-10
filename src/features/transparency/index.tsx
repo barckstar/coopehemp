@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useTranslation } from '../../i18n/LanguageContext';
 import useScrollToTop from '../../shared/hooks/useScrollToTop';
+import { useSEO } from '../../shared/hooks/useSEO';
 
 interface DocItem {
   name: string;
@@ -84,9 +85,34 @@ const statsData = [
   { key: 'transparency.stat_products', value: '15+', icon: <Package size={22} /> },
 ];
 
+const TRANSPARENCY_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': 'https://coopehemp.cr/transparencia#webpage',
+  name: 'Transparencia — CoopeHemp R.L.',
+  url: 'https://coopehemp.cr/transparencia',
+  description: 'Portal de transparencia de CoopeHemp R.L.: documentos oficiales, actas, certificaciones, estadísticas y reportes de sostenibilidad de la cooperativa.',
+  isPartOf: { '@id': 'https://coopehemp.cr/#website' },
+  breadcrumb: {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://coopehemp.cr/' },
+      { '@type': 'ListItem', position: 2, name: 'Transparencia', item: 'https://coopehemp.cr/transparencia' },
+    ],
+  },
+};
+
 const Transparency = () => {
   useScrollToTop();
   const { t } = useTranslation();
+
+  useSEO({
+    title: 'Transparencia — Documentos y Reportes',
+    description: 'Accede a los documentos oficiales, certificaciones, actas y reportes de sostenibilidad de CoopeHemp R.L. Compromiso total con la transparencia cooperativa.',
+    path: '/transparencia',
+    image: '/hemp-field.jpg',
+    structuredData: TRANSPARENCY_LD,
+  });
 
   return (
     <div className="min-h-screen bg-gray-50">

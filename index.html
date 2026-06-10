@@ -1,13 +1,249 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" dir="ltr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/logo.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="CoopeHemp R.L. — Cooperativa costarricense pionera en la producción sostenible de cáñamo. Conectamos productores, industria y comunidad." />
-    <meta property="og:title" content="CoopeHemp R.L." />
-    <meta property="og:description" content="Pioneros en la producción sostenible de cáñamo en Costa Rica." />
-    <title>CoopeHemp R.L.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <!-- ══════════════════════════════════════════
+         PRIMARY SEO
+    ══════════════════════════════════════════ -->
+    <title>CoopeHemp R.L. — Cooperativa de Cáñamo Sostenible · Costa Rica</title>
+    <meta name="description" content="CoopeHemp R.L. es la cooperativa pionera en la producción sostenible de cáñamo en Costa Rica. Productos certificados de CBD, fibra, aceites y superfoods. Conectamos productores, industria y comunidad." />
+    <meta name="keywords" content="cáñamo Costa Rica, hemp cooperative, CBD Costa Rica, cooperativa cáñamo, productos cáñamo, hemp sostenible, aceite CBD, CoopeHemp, fibra cáñamo, superfoods cáñamo, bienestar natural" />
+    <meta name="author" content="CoopeHemp R.L." />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="bingbot" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://coopehemp.cr/" />
+
+    <!-- ══════════════════════════════════════════
+         HREFLANG — IDIOMAS
+    ══════════════════════════════════════════ -->
+    <link rel="alternate" hreflang="es-CR" href="https://coopehemp.cr/" />
+    <link rel="alternate" hreflang="en"    href="https://coopehemp.cr/?lang=en" />
+    <link rel="alternate" hreflang="x-default" href="https://coopehemp.cr/" />
+
+    <!-- ══════════════════════════════════════════
+         OPEN GRAPH — Facebook · Instagram · WhatsApp · LinkedIn · Slack · Telegram
+    ══════════════════════════════════════════ -->
+    <meta property="og:type"               content="website" />
+    <meta property="og:site_name"          content="CoopeHemp R.L." />
+    <meta property="og:title"              content="CoopeHemp R.L. — Cooperativa de Cáñamo Sostenible · Costa Rica" />
+    <meta property="og:description"        content="Pioneros en la producción sostenible de cáñamo en Costa Rica. Productos naturales, certificados y de la más alta calidad. Únete a la revolución verde." />
+    <meta property="og:image"              content="https://coopehemp.cr/og-cover.jpg" />
+    <meta property="og:image:secure_url"   content="https://coopehemp.cr/og-cover.jpg" />
+    <meta property="og:image:alt"          content="Campos de cáñamo de CoopeHemp al amanecer en Costa Rica" />
+    <meta property="og:image:width"        content="1200" />
+    <meta property="og:image:height"       content="630" />
+    <meta property="og:image:type"         content="image/jpeg" />
+    <meta property="og:url"                content="https://coopehemp.cr/" />
+    <meta property="og:locale"             content="es_CR" />
+    <meta property="og:locale:alternate"   content="en_US" />
+
+    <!-- ══════════════════════════════════════════
+         TWITTER / X CARD
+    ══════════════════════════════════════════ -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:site"        content="@coopehemp" />
+    <meta name="twitter:creator"     content="@coopehemp" />
+    <meta name="twitter:title"       content="CoopeHemp R.L. — Cooperativa de Cáñamo · Costa Rica" />
+    <meta name="twitter:description" content="Pioneros en la producción sostenible de cáñamo en Costa Rica. Conectamos productores, industria y comunidad con productos naturales y certificados." />
+    <meta name="twitter:image"       content="https://coopehemp.cr/og-cover.jpg" />
+    <meta name="twitter:image:alt"   content="Campos de cáñamo de CoopeHemp al amanecer en Costa Rica" />
+
+    <!-- ══════════════════════════════════════════
+         FAVICONS & TOUCH ICONS
+    ══════════════════════════════════════════ -->
+    <link rel="icon"             type="image/png" sizes="32x32" href="/logo.png" />
+    <link rel="icon"             type="image/png" sizes="16x16" href="/logo.png" />
+    <link rel="apple-touch-icon" sizes="180x180"               href="/logo.png" />
+    <link rel="shortcut icon"                                   href="/logo.png" />
+    <link rel="mask-icon"        href="/logo.png" color="#166534" />
+
+    <!-- ══════════════════════════════════════════
+         TEMA Y COLOR DE MARCA
+    ══════════════════════════════════════════ -->
+    <meta name="theme-color"            content="#166534" />
+    <meta name="msapplication-TileColor" content="#166534" />
+    <meta name="msapplication-TileImage" content="/logo.png" />
+    <meta name="msapplication-config"   content="/browserconfig.xml" />
+
+    <!-- ══════════════════════════════════════════
+         GEO & SEO LOCAL (Google Maps, Bing Places)
+    ══════════════════════════════════════════ -->
+    <meta name="geo.region"    content="CR" />
+    <meta name="geo.country"   content="Costa Rica" />
+    <meta name="geo.placename" content="Costa Rica" />
+    <meta name="ICBM"          content="9.7489, -83.7534" />
+
+    <!-- ══════════════════════════════════════════
+         STRUCTURED DATA — Organization (Google · Bing · IAs)
+    ══════════════════════════════════════════ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": ["Organization", "LocalBusiness"],
+      "@id": "https://coopehemp.cr/#organization",
+      "name": "CoopeHemp R.L.",
+      "alternateName": ["CoopeHemp", "Cooperativa de Cáñamo Costa Rica"],
+      "url": "https://coopehemp.cr",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://coopehemp.cr/logo.png",
+        "width": 512,
+        "height": 512
+      },
+      "image": "https://coopehemp.cr/og-cover.jpg",
+      "description": "Cooperativa costarricense pionera en la producción sostenible de cáñamo. Ofrecemos productos certificados de CBD, fibra, aceites y superfoods. Conectamos productores, industria y comunidad.",
+      "foundingDate": "2023",
+      "foundingLocation": {
+        "@type": "Place",
+        "name": "Costa Rica",
+        "addressCountry": "CR"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "CR",
+        "addressRegion": "Costa Rica"
+      },
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "url": "https://coopehemp.cr/contacto",
+          "availableLanguage": ["Spanish", "English"]
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "url": "https://coopehemp.cr/contacto",
+          "availableLanguage": ["Spanish", "English"]
+        }
+      ],
+      "sameAs": [
+        "https://www.facebook.com/coopehemp",
+        "https://www.instagram.com/coopehemp"
+      ],
+      "keywords": "cáñamo, hemp, CBD, cooperativa, Costa Rica, sostenible, orgánico, bienestar natural",
+      "numberOfEmployees": {
+        "@type": "QuantitativeValue",
+        "minValue": 50
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Costa Rica"
+      }
+    }
+    </script>
+
+    <!-- ══════════════════════════════════════════
+         STRUCTURED DATA — WebSite con SearchAction
+    ══════════════════════════════════════════ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://coopehemp.cr/#website",
+      "name": "CoopeHemp R.L.",
+      "url": "https://coopehemp.cr",
+      "description": "Sitio oficial de CoopeHemp R.L., cooperativa pionera en la producción sostenible de cáñamo en Costa Rica.",
+      "publisher": {
+        "@id": "https://coopehemp.cr/#organization"
+      },
+      "inLanguage": ["es-CR", "en-US"],
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://coopehemp.cr/?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- ══════════════════════════════════════════
+         STRUCTURED DATA — BreadcrumbList raíz
+    ══════════════════════════════════════════ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://coopehemp.cr/"
+        }
+      ]
+    }
+    </script>
+
+    <!-- ══════════════════════════════════════════
+         STRUCTURED DATA — FAQPage (señales semánticas para IAs)
+    ══════════════════════════════════════════ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es CoopeHemp R.L.?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "CoopeHemp R.L. es la primera cooperativa costarricense dedicada a la producción sostenible y regulada de cáñamo (hemp). Conectamos productores, transformadores y consumidores con productos naturales y certificados."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Dónde está ubicada CoopeHemp?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "CoopeHemp R.L. opera en Costa Rica, trabajando con más de 50 productores a nivel nacional para ofrecer productos de cáñamo 100% orgánicos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué productos ofrece CoopeHemp?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "CoopeHemp ofrece aceites de CBD de espectro completo, pre-rolls de cáñamo, té de cáñamo, bálsamos terapéuticos, proteína de cáñamo, fibra textil y más productos naturales derivados del cáñamo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Los productos de CoopeHemp son legales en Costa Rica?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. CoopeHemp R.L. opera bajo el marco legal costarricense vigente para la producción y comercialización de cáñamo industrial y sus derivados, con productos certificados y regulados."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- ══════════════════════════════════════════
+         PERFORMANCE — Preconnect & DNS Prefetch
+    ══════════════════════════════════════════ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
+    <!-- ══════════════════════════════════════════
+         SEGURIDAD (meta headers)
+    ══════════════════════════════════════════ -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="Referrer-Policy"        content="strict-origin-when-cross-origin" />
+
+    <!-- ══════════════════════════════════════════
+         VERIFICACIÓN DE MOTORES (reemplazar con claves reales)
+    ══════════════════════════════════════════ -->
+    <!-- <meta name="google-site-verification" content="TU_CLAVE_AQUI" /> -->
+    <!-- <meta name="msvalidate.01"            content="TU_CLAVE_BING_AQUI" /> -->
+    <!-- <meta name="yandex-verification"      content="TU_CLAVE_YANDEX_AQUI" /> -->
   </head>
   <body>
     <div id="root"></div>

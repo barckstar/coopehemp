@@ -3,11 +3,39 @@ import { motion } from 'framer-motion';
 import { Calendar, User, ArrowRight, Tag, CheckCircle } from 'lucide-react';
 import { useTranslation } from '../../i18n/LanguageContext';
 import useScrollToTop from '../../shared/hooks/useScrollToTop';
+import { useSEO } from '../../shared/hooks/useSEO';
+
+const BLOG_LD = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    '@id': 'https://coopehemp.cr/blog#webpage',
+    name: 'Blog de Cáñamo — CoopeHemp R.L.',
+    url: 'https://coopehemp.cr/blog',
+    description: 'Artículos, noticias e investigaciones sobre el cáñamo, CBD, agricultura sostenible y el mercado hemp en Costa Rica y Latinoamérica.',
+    publisher: { '@id': 'https://coopehemp.cr/#organization' },
+    isPartOf: { '@id': 'https://coopehemp.cr/#website' },
+    breadcrumb: {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://coopehemp.cr/' },
+            { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://coopehemp.cr/blog' },
+        ],
+    },
+};
 
 const Blog = () => {
     useScrollToTop();
     const { t } = useTranslation();
     const [subscribed, setSubscribed] = useState(false);
+
+    useSEO({
+        title: 'Blog — Noticias y Artículos sobre Cáñamo',
+        description: 'Descubre artículos, investigaciones y noticias sobre cáñamo, CBD, agricultura sostenible y el mercado hemp en Costa Rica. Blog oficial de CoopeHemp R.L.',
+        path: '/blog',
+        image: '/hemp-plant.jpg',
+        type: 'article',
+        structuredData: BLOG_LD,
+    });
     const [email, setEmail] = useState('');
 
     const posts = [

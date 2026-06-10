@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- ── HOME ── -->
+  <url>
+    <loc>https://coopehemp.cr/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es-CR" href="https://coopehemp.cr/" />
+    <xhtml:link rel="alternate" hreflang="en"    href="https://coopehemp.cr/?lang=en" />
+    <image:image>
+      <image:loc>https://coopehemp.cr/og-cover.jpg</image:loc>
+      <image:caption>Campos de cáñamo de CoopeHemp al amanecer en Costa Rica</image:caption>
+    </image:image>
+  </url>
+
+  <!-- ── SOBRE NOSOTROS ── -->
+  <url>
+    <loc>https://coopehemp.cr/about</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es-CR" href="https://coopehemp.cr/about" />
+    <xhtml:link rel="alternate" hreflang="en"    href="https://coopehemp.cr/about?lang=en" />
+    <image:image>
+      <image:loc>https://coopehemp.cr/hemp-hands-soil.jpg</image:loc>
+      <image:caption>Productores de cáñamo en Costa Rica — CoopeHemp R.L.</image:caption>
+    </image:image>
+  </url>
+
+  <!-- ── PRODUCTOS ── -->
+  <url>
+    <loc>https://coopehemp.cr/productos</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es-CR" href="https://coopehemp.cr/productos" />
+    <xhtml:link rel="alternate" hreflang="en"    href="https://coopehemp.cr/productos?lang=en" />
+    <image:image>
+      <image:loc>https://coopehemp.cr/hemp-gummies.jpg</image:loc>
+      <image:caption>Productos de cáñamo natural — CoopeHemp R.L.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://coopehemp.cr/hemp-oil.jpg</image:loc>
+      <image:caption>Aceite de CBD espectro completo — CoopeHemp R.L.</image:caption>
+    </image:image>
+  </url>
+
+  <!-- ── TRANSPARENCIA ── -->
+  <url>
+    <loc>https://coopehemp.cr/transparencia</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="es-CR" href="https://coopehemp.cr/transparencia" />
+    <xhtml:link rel="alternate" hreflang="en"    href="https://coopehemp.cr/transparencia?lang=en" />
+  </url>
+
+  <!-- ── DIRECTORIO ── -->
+  <url>
+    <loc>https://coopehemp.cr/directorio</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="es-CR" href="https://coopehemp.cr/directorio" />
+    <xhtml:link rel="alternate" hreflang="en"    href="https://coopehemp.cr/directorio?lang=en" />
+  </url>
+
+  <!-- ── MAPA DE PUNTOS DE VENTA ── -->
+  <url>
+    <loc>https://coopehemp.cr/mapa</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="es-CR" href="https://coopehemp.cr/mapa" />
+    <xhtml:link rel="alternate" hreflang="en"    href="https://coopehemp.cr/mapa?lang=en" />
+  </url>
+
+  <!-- ── BLOG ── -->
+  <url>
+    <loc>https://coopehemp.cr/blog</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es-CR" href="https://coopehemp.cr/blog" />
+    <xhtml:link rel="alternate" hreflang="en"    href="https://coopehemp.cr/blog?lang=en" />
+  </url>
+
+  <!-- ── CONTACTO ── -->
+  <url>
+    <loc>https://coopehemp.cr/contacto</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es-CR" href="https://coopehemp.cr/contacto" />
+    <xhtml:link rel="alternate" hreflang="en"    href="https://coopehemp.cr/contacto?lang=en" />
+  </url>
+
+</urlset>

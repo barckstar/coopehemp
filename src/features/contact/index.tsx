@@ -3,11 +3,37 @@ import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, TrendingUp, Users, ArrowRight, CheckCircle } from 'lucide-react';
 import { useTranslation } from '../../i18n/LanguageContext';
 import useScrollToTop from '../../shared/hooks/useScrollToTop';
+import { useSEO } from '../../shared/hooks/useSEO';
+
+const CONTACT_LD = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    '@id': 'https://coopehemp.cr/contacto#webpage',
+    name: 'Contacto — CoopeHemp R.L.',
+    url: 'https://coopehemp.cr/contacto',
+    description: 'Comunícate con CoopeHemp R.L. para consultas sobre productos, membresía, inversión o alianzas estratégicas en el sector cáñamo de Costa Rica.',
+    isPartOf: { '@id': 'https://coopehemp.cr/#website' },
+    breadcrumb: {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://coopehemp.cr/' },
+            { '@type': 'ListItem', position: 2, name: 'Contacto', item: 'https://coopehemp.cr/contacto' },
+        ],
+    },
+};
 
 const Contact = () => {
     useScrollToTop();
     const { t } = useTranslation();
     const [submitted, setSubmitted] = useState(false);
+
+    useSEO({
+        title: 'Contacto — Hablemos',
+        description: 'Contáctanos para unirte a CoopeHemp, conocer nuestros productos o explorar alianzas. Estamos en Costa Rica y atendemos en español e inglés.',
+        path: '/contacto',
+        image: '/hemp-field-sunrise.jpg',
+        structuredData: CONTACT_LD,
+    });
 
     const fadeInUp = {
         initial: { opacity: 0, y: 20 },

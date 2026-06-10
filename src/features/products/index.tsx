@@ -3,10 +3,36 @@ import { ShoppingBag, Star, ArrowRight, Leaf } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from '../../i18n/LanguageContext';
 import useScrollToTop from '../../shared/hooks/useScrollToTop';
+import { useSEO } from '../../shared/hooks/useSEO';
+
+const PRODUCTS_LD = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    '@id': 'https://coopehemp.cr/productos#webpage',
+    name: 'Productos de Cáñamo — CoopeHemp R.L.',
+    url: 'https://coopehemp.cr/productos',
+    description: 'Catálogo de productos naturales de cáñamo de CoopeHemp: aceites CBD, pre-rolls, tés, bálsamos, proteínas y fibra textil. 100% orgánicos, certificados en Costa Rica.',
+    isPartOf: { '@id': 'https://coopehemp.cr/#website' },
+    breadcrumb: {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://coopehemp.cr/' },
+            { '@type': 'ListItem', position: 2, name: 'Productos', item: 'https://coopehemp.cr/productos' },
+        ],
+    },
+};
 
 const Products = () => {
     useScrollToTop();
     const { t } = useTranslation();
+
+    useSEO({
+        title: 'Productos Naturales de Cáñamo',
+        description: 'Catálogo de productos de cáñamo de CoopeHemp: aceites CBD de espectro completo, pre-rolls, tés, bálsamos terapéuticos, proteína y fibra. 100% orgánicos, Costa Rica.',
+        path: '/productos',
+        image: '/hemp-gummies.jpg',
+        structuredData: PRODUCTS_LD,
+    });
 
     const products = [
         {

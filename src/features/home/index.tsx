@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Leaf, Droplet, Sun, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from '../../i18n/LanguageContext';
+import { useSEO } from '../../shared/hooks/useSEO';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -10,8 +11,33 @@ const fadeInUp = {
   transition: { duration: 0.6 },
 };
 
+const HOME_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': 'https://coopehemp.cr/#webpage',
+  name: 'CoopeHemp R.L. — Cooperativa de Cáñamo Sostenible · Costa Rica',
+  url: 'https://coopehemp.cr/',
+  description:
+    'CoopeHemp R.L. es la cooperativa pionera en la producción sostenible de cáñamo en Costa Rica. Productos certificados de CBD, fibra, aceites y superfoods.',
+  isPartOf: { '@id': 'https://coopehemp.cr/#website' },
+  about: { '@id': 'https://coopehemp.cr/#organization' },
+  breadcrumb: {
+    '@type': 'BreadcrumbList',
+    itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://coopehemp.cr/' }],
+  },
+};
+
 const Home = () => {
   const { t } = useTranslation();
+
+  useSEO({
+    title: 'Cooperativa de Cáñamo Sostenible · Costa Rica',
+    description:
+      'CoopeHemp R.L. es la cooperativa pionera en la producción sostenible de cáñamo en Costa Rica. Productos naturales de CBD, aceites, fibra y superfoods certificados.',
+    path: '/',
+    image: '/og-cover.jpg',
+    structuredData: HOME_LD,
+  });
 
   const benefits = [
     { icon: <Leaf size={36} />, titleKey: 'home.b1_title', descKey: 'home.b1_desc' },

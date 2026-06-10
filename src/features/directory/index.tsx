@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useTranslation } from '../../i18n/LanguageContext';
 import useScrollToTop from '../../shared/hooks/useScrollToTop';
+import { useSEO } from '../../shared/hooks/useSEO';
 
 interface Member {
   id: number;
@@ -41,9 +42,34 @@ const stats = [
 
 const provinces = ['', 'San José', 'Alajuela', 'Cartago', 'Heredia', 'Guanacaste', 'Puntarenas', 'Limón'];
 
+const DIRECTORY_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': 'https://coopehemp.cr/directorio#webpage',
+  name: 'Directorio de Asociados — CoopeHemp R.L.',
+  url: 'https://coopehemp.cr/directorio',
+  description: 'Directorio oficial de los socios y productores miembros de CoopeHemp R.L. en Costa Rica. Conoce a la comunidad cooperativa.',
+  isPartOf: { '@id': 'https://coopehemp.cr/#website' },
+  breadcrumb: {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://coopehemp.cr/' },
+      { '@type': 'ListItem', position: 2, name: 'Directorio', item: 'https://coopehemp.cr/directorio' },
+    ],
+  },
+};
+
 const Directory = () => {
   useScrollToTop();
   const { t } = useTranslation();
+
+  useSEO({
+    title: 'Directorio de Asociados',
+    description: 'Conoce a los socios y productores que forman CoopeHemp R.L. en Costa Rica. Directorio oficial de la comunidad cooperativa de cáñamo sostenible.',
+    path: '/directorio',
+    image: '/hands-soil-group.jpg',
+    structuredData: DIRECTORY_LD,
+  });
   const [search, setSearch] = useState('');
   const [province, setProvince] = useState('');
 

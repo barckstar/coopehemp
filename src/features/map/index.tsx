@@ -6,6 +6,7 @@ import { Search, MapPin, Clock, Package, Filter } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useTranslation } from '../../i18n/LanguageContext';
 import useScrollToTop from '../../shared/hooks/useScrollToTop';
+import { useSEO } from '../../shared/hooks/useSEO';
 
 // Fix Leaflet default icon issue with Vite
 delete (L.Icon.Default.prototype as unknown as Record<string, unknown>)._getIconUrl;
@@ -153,9 +154,34 @@ const MapFly = ({ center }: { center: [number, number] | null }) => {
   return null;
 };
 
+const MAP_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': 'https://coopehemp.cr/mapa#webpage',
+  name: 'Puntos de Venta — CoopeHemp R.L.',
+  url: 'https://coopehemp.cr/mapa',
+  description: 'Encuentra los puntos de venta y distribuidores oficiales de productos CoopeHemp en Costa Rica. Mapa interactivo con ubicaciones y horarios.',
+  isPartOf: { '@id': 'https://coopehemp.cr/#website' },
+  breadcrumb: {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://coopehemp.cr/' },
+      { '@type': 'ListItem', position: 2, name: 'Puntos de Venta', item: 'https://coopehemp.cr/mapa' },
+    ],
+  },
+};
+
 const VendingMap = () => {
   useScrollToTop();
   const { t } = useTranslation();
+
+  useSEO({
+    title: 'Puntos de Venta — Encuentra Nuestros Productos',
+    description: 'Localiza los puntos de venta y distribuidores de productos CoopeHemp en Costa Rica. Mapa interactivo con tiendas, horarios y productos disponibles.',
+    path: '/mapa',
+    image: '/hemp-field-sunrise.jpg',
+    structuredData: MAP_LD,
+  });
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState<'all' | 'active' | 'soon'>('all');
   const [province, setProvince] = useState('Todas las provincias');
