@@ -1,16 +1,19 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Globe, ChevronDown } from 'lucide-react';
+import { Menu, X, Globe, ChevronDown, ShoppingCart } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
 import { useTranslation, type Language } from '../../i18n/LanguageContext';
+import { useCart } from '../../features/cart/CartContext';
 
 
 const Navbar = () => {
+  const { totalItems, toggleCart } = useCart();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [cooperativeOpen, setCooperativeOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
+  const closeMenu = () => { setIsOpen(false); setCooperativeOpen(false); };
   const cooperativeRef = useRef<HTMLDivElement>(null);
   const langRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
@@ -207,17 +210,28 @@ const Navbar = () => {
             </AnimatePresence>
           </div>
 
-          {/* CTA */}
-          <Link
-            to="/contacto"
-            className="bg-coope-green-600 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-coope-green-700 transition-colors shadow-lg shadow-coope-green-600/20"
+          {/* Cart button */}
+          <button
+            onClick={toggleCart}
+            className={clsx(
+              'relative flex items-center justify-center w-10 h-10 rounded-full transition-colors',
+              scrolled
+                ? 'text-gray-700 hover:bg-gray-100'
+                : 'text-white/90 hover:bg-white/10'
+            )}
+            aria-label="Carrito"
           >
-            {t('nav.cta')}
-          </Link>
+            <ShoppingCart size={20} />
+            {totalItems > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 bg-coope-green-500 text-white text-[10px] font-bold min-w-[18px] h-[18px] rounded-full flex items-center justify-center px-1 leading-none">
+                {totalItems > 99 ? '99+' : totalItems}
+              </span>
+            )}
+          </button>
         </div>
 
         {/* Mobile Toggle */}
-        <div className="lg:hidden flex items-center gap-2">
+        <div className="lg:hidden flex items-center gap-1.5">
           {/* Mobile language quick toggle */}
           <button
             onClick={() => setLang(lang === 'es' ? 'en' : 'es')}
@@ -229,6 +243,24 @@ const Navbar = () => {
             <Globe size={12} />
             <span className="uppercase">{lang}</span>
           </button>
+
+          {/* Mobile cart */}
+          <button
+            onClick={toggleCart}
+            className={clsx(
+              'relative flex items-center justify-center w-8 h-8 rounded-full transition-colors',
+              scrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/10'
+            )}
+            aria-label="Carrito"
+          >
+            <ShoppingCart size={18} />
+            {totalItems > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 bg-coope-green-500 text-white text-[9px] font-bold min-w-[16px] h-[16px] rounded-full flex items-center justify-center px-0.5 leading-none">
+                {totalItems > 99 ? '99+' : totalItems}
+              </span>
+            )}
+          </button>
+
           <button
             className={clsx('p-1', scrolled ? 'text-gray-900' : 'text-white')}
             onClick={() => setIsOpen(!isOpen)}
@@ -278,12 +310,18 @@ const Navbar = () => {
                 </Link>
               ))}
 
-              <Link
-                to="/contacto"
-                className="mt-4 bg-coope-green-600 text-white px-6 py-3 rounded-full font-semibold text-center hover:bg-coope-green-700 transition-colors"
+              <button
+                onClick={() => { closeMenu(); toggleCart(); }}
+                className="mt-4 bg-coope-green-600 text-white px-6 py-3 rounded-full font-semibold text-center hover:bg-coope-green-700 transition-colors flex items-center justify-center gap-2"
               >
-                {t('nav.cta')}
-              </Link>
+                <ShoppingCart size={16} />
+                {t('cart.title')}
+                {totalItems > 0 && (
+                  <span className="bg-white text-coope-green-600 text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
+                    {totalItems}
+                  </span>
+                )}
+              </button>
             </div>
           </motion.div>
         )}

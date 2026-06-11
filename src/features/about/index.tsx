@@ -94,7 +94,7 @@ const About = () => {
             </section>
 
             {/* Our Story / Intro */}
-            <section className="py-24 bg-white">
+            <section className="py-24 bg-white overflow-hidden">
                 <div className="container mx-auto px-4">
                     <div className="flex flex-col lg:flex-row items-center gap-16">
                         <motion.div {...fadeIn} className="lg:w-1/2">
@@ -122,8 +122,8 @@ const About = () => {
                         </motion.div>
 
                         <motion.div
-                            initial={{ opacity: 0, x: 50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
+                            initial={{ opacity: 0, y: 40 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             className="lg:w-1/2 relative"
                         >

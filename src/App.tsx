@@ -6,10 +6,12 @@ import Home from './features/home';
 const About = lazy(() => import('./features/about'));
 const Contact = lazy(() => import('./features/contact'));
 const Blog = lazy(() => import('./features/blog'));
+const BlogPost = lazy(() => import('./features/blog/Post'));
 const Products = lazy(() => import('./features/products'));
 const VendingMap = lazy(() => import('./features/map'));
 const Directory = lazy(() => import('./features/directory'));
 const Transparency = lazy(() => import('./features/transparency'));
+const Checkout     = lazy(() => import('./features/checkout'));
 
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center">
@@ -30,7 +32,9 @@ function App() {
             <Route path="directorio" element={<Directory />} />
             <Route path="transparencia" element={<Transparency />} />
             <Route path="blog" element={<Blog />} />
+            <Route path="blog/:slug" element={<BlogPost />} />
             <Route path="contacto" element={<Contact />} />
+            <Route path="checkout" element={<Checkout />} />
             {/* Legacy aliases */}
             <Route path="products" element={<Products />} />
             <Route path="contact" element={<Contact />} />

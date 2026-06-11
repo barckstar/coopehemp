@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la /media/barckstaz/M2/Proyectos/Coopehemp/)",
+      "Read(//media/barckstaz/M2/Proyectos/Coopehemp/**)",
+      "Bash(mkdir -p /media/barckstaz/M2/Proyectos/Coopehemp/Back-End/src/scripts)",
+      "Bash(pg_isready -h localhost -p 5432 -U coopehemp)",
+      "Bash(redis-cli ping *)",
+      "Bash(docker exec *)",
+      "Bash(npx medusa *)",
+      "Bash(curl -s http://localhost:9000/store/blog?locale=es)",
+      "Bash(limit=3 2>&1)",
+      "Bash(curl -sf \"http://localhost:9000/store/blog?locale=es&limit=3\")",
+      "Bash(curl -s --max-time 3 http://localhost:9000/health)",
+      "Bash(curl -s \"http://localhost:9000/store/blog?locale=es&limit=3\")",
+      "Bash(python3 -m json.tool)",
+      "Bash(curl -s -X POST http://localhost:9000/auth/user/emailpass -H 'Content-Type: application/json' -d '{\"email\":\"admin@coopehemp.cr\",\"password\":\"Admin2025!\"}')",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('\\\\n'.join\\(k for k in d.get\\('dependencies',{}\\) if 'payment' in k\\)\\)\")",
+      "Bash(grep -v \"^$\")",
+      "Bash(node -e ' *)"
+    ],
+    "additionalDirectories": [
+      "/media/barckstaz/M2/Proyectos/Coopehemp/Back-End/src"
+    ]
+  }
+}

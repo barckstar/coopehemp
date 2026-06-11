@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ShoppingBag, Star, ArrowRight, Leaf } from 'lucide-react';
+import { ShoppingCart, Check, Star, ArrowRight, Leaf } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from '../../i18n/LanguageContext';
 import useScrollToTop from '../../shared/hooks/useScrollToTop';
 import { useSEO } from '../../shared/hooks/useSEO';
+import { useCart } from '../cart/CartContext';
 
 const PRODUCTS_LD = {
     '@context': 'https://schema.org',
@@ -21,6 +23,43 @@ const PRODUCTS_LD = {
         ],
     },
 };
+
+function parsePrice(str: string): number {
+    return parseFloat(str.replace(/[^0-9.]/g, '')) || 0;
+}
+
+function AddToCartButton({ product }: { product: { id: number; name: string; price: string; image: string; category: string } }) {
+    const { addItem, openCart } = useCart();
+    const { t } = useTranslation();
+    const [added, setAdded] = useState(false);
+
+    const handleAdd = () => {
+        addItem({
+            id: product.id,
+            name: product.name,
+            price: parsePrice(product.price),
+            image: product.image,
+            category: product.category,
+        });
+        setAdded(true);
+        setTimeout(() => setAdded(false), 1800);
+        openCart();
+    };
+
+    return (
+        <button
+            onClick={handleAdd}
+            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium transition-all active:scale-95 ${
+                added
+                    ? 'bg-coope-green-600 text-white'
+                    : 'bg-neutral-900 text-white hover:bg-coope-green-700'
+            }`}
+        >
+            {added ? <Check className="w-4 h-4" /> : <ShoppingCart className="w-4 h-4" />}
+            <span>{added ? t('cart.added') : t('cart.add')}</span>
+        </button>
+    );
+}
 
 const Products = () => {
     useScrollToTop();
@@ -157,10 +196,7 @@ const Products = () => {
                                             <Star key={star} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
                                         ))}
                                     </div>
-                                    <button className="flex items-center gap-2 bg-neutral-900 text-white px-5 py-2.5 rounded-xl font-medium hover:bg-green-700 transition-all active:scale-95">
-                                        <ShoppingBag className="w-4 h-4" />
-                                        <span>{t('products.details_btn')}</span>
-                                    </button>
+                                    <AddToCartButton product={product} />
                                 </div>
                             </div>
                         </motion.div>
