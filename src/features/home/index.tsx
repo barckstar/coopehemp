@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import {
   motion,
   useScroll,
@@ -22,41 +22,21 @@ import {
 import { Link } from 'react-router-dom';
 import { useTranslation } from '../../i18n/LanguageContext';
 import { useSEO } from '../../shared/hooks/useSEO';
+import { getProducts, getRegions } from '../../shared/api/medusa-store';
+import { useCart } from '../cart/CartContext';
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
-const FEATURED_PRODUCTS = [
-  {
-    id: 1,
-    name: 'Aceite CBD Espectro Completo',
-    description: 'Formulado con cannabinoides naturales para alivio, bienestar y equilibrio profundo.',
-    price: '$45.00',
-    image: '/productos/product-hump-oil-tea.jpg',
-    badge: 'Más vendido',
-    stars: 5,
-    category: 'Terapéutico',
-  },
-  {
-    id: 2,
-    name: 'Crema Facial de Cáñamo',
-    description: 'Hidratación profunda con aceite de semilla de cáñamo. pH-balanceado, no comedogénico.',
-    price: '$38.00',
-    image: '/productos/product-beauty-cream.jpg',
-    badge: 'Nuevo',
-    stars: 5,
-    category: 'Cosmética',
-  },
-  {
-    id: 3,
-    name: 'Pre-Rolls CBD Artesanales',
-    description: 'Flores premium seleccionadas a mano, roladas en papel orgánico. Sin nicotina.',
-    price: '$15.00',
-    image: '/productos/product-prerolls.jpg',
-    badge: 'Especial',
-    stars: 4,
-    category: 'Fumable',
-  },
-];
+interface FeaturedProduct {
+  id: string;
+  variantId?: string;
+  name: string;
+  description: string;
+  price: string;
+  priceNumeric: number;
+  image: string;
+  category: string;
+}
 
 const MEDICAL_BENEFITS = [
   { icon: <Heart size={20} />, title: 'Antiinflamatorio', desc: 'El CBD inhibe las vías inflamatorias sin efectos secundarios gastrointestinales.' },
@@ -409,6 +389,46 @@ const fadeInUp = {
 
 const Home = () => {
   const { t } = useTranslation();
+  const { addItem, openCart } = useCart();
+  const [featuredProducts, setFeaturedProducts] = useState<FeaturedProduct[]>([]);
+  const [addedId, setAddedId] = useState<string | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { regions } = await getRegions();
+        const region = regions.find(r => r.currency_code === 'crc') ?? regions[0];
+        const { products } = await getProducts({ region_id: region?.id, limit: 20 });
+        if (products.length === 0) return;
+        const shuffled = [...products].sort(() => Math.random() - 0.5).slice(0, 3);
+        const currency = shuffled[0]?.variants?.[0]?.calculated_price?.currency_code ?? region?.currency_code ?? 'crc';
+        setFeaturedProducts(shuffled.map(p => {
+          const variant = p.variants?.[0];
+          const rawAmount = variant?.calculated_price?.calculated_amount ?? 0;
+          const priceNum = rawAmount / 100;
+          return {
+            id: p.id,
+            variantId: variant?.id,
+            name: p.title,
+            description: p.description ?? '',
+            price: rawAmount > 0
+              ? new Intl.NumberFormat('es-CR', {
+                  style: 'currency',
+                  currency: currency.toUpperCase(),
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
+                }).format(priceNum)
+              : 'Consultar precio',
+            priceNumeric: priceNum,
+            image: p.thumbnail ?? '/hemp-plant.jpg',
+            category: p.tags?.[0]?.value ?? 'Producto',
+          };
+        }));
+      } catch {
+        // backend unavailable — section stays empty, no fallback needed
+      }
+    })();
+  }, []);
 
   useSEO({
     title: 'Cooperativa de Cáñamo Sostenible · Costa Rica',
@@ -512,62 +532,73 @@ const Home = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            {FEATURED_PRODUCTS.map((product, i) => (
-              <motion.div
-                key={product.id}
-                initial={{ opacity: 0, y: 32 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ delay: i * 0.12, duration: 0.55 }}
-                className="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-400 border border-gray-100 flex flex-col"
-              >
-                {/* Image */}
-                <div className="relative h-60 overflow-hidden">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-coope-green-600 text-white text-xs font-bold px-3 py-1 rounded-full">
-                      {product.badge}
-                    </span>
-                  </div>
-                  <div className="absolute top-4 right-4 bg-black/30 backdrop-blur-sm text-white text-xs font-medium px-2.5 py-1 rounded-full">
-                    {product.category}
-                  </div>
-                </div>
-
-                {/* Info */}
-                <div className="p-6 flex flex-col flex-1">
-                  {/* Stars */}
-                  <div className="flex gap-0.5 mb-3">
-                    {Array.from({ length: 5 }).map((_, j) => (
-                      <Star
-                        key={j}
-                        size={14}
-                        className={j < product.stars ? 'text-amber-400 fill-amber-400' : 'text-gray-200 fill-gray-200'}
-                      />
-                    ))}
+          {featuredProducts.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+              {featuredProducts.map((product, i) => (
+                <motion.div
+                  key={product.id}
+                  initial={{ opacity: 0, y: 32 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ delay: i * 0.12, duration: 0.55 }}
+                  className="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-400 border border-gray-100 flex flex-col"
+                >
+                  <div className="relative h-60 overflow-hidden">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      onError={(e) => { (e.target as HTMLImageElement).src = '/hemp-plant.jpg'; }}
+                    />
+                    <div className="absolute top-4 right-4 bg-black/30 backdrop-blur-sm text-white text-xs font-medium px-2.5 py-1 rounded-full">
+                      {product.category}
+                    </div>
                   </div>
 
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">{product.name}</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed flex-1">{product.description}</p>
+                  <div className="p-6 flex flex-col flex-1">
+                    <div className="flex gap-0.5 mb-3">
+                      {Array.from({ length: 5 }).map((_, j) => (
+                        <Star key={j} size={14} className="text-amber-400 fill-amber-400" />
+                      ))}
+                    </div>
 
-                  <div className="flex items-center justify-between mt-5 pt-4 border-t border-gray-100">
-                    <span className="text-2xl font-bold text-coope-green-700">{product.price}</span>
-                    <Link
-                      to="/productos"
-                      className="flex items-center gap-1.5 bg-coope-green-600 hover:bg-coope-green-700 text-white px-4 py-2 rounded-full text-sm font-bold transition-all hover:gap-2.5"
-                    >
-                      Comprar <ArrowRight size={15} />
-                    </Link>
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">{product.name}</h3>
+                    <p className="text-gray-500 text-sm leading-relaxed flex-1 line-clamp-2">{product.description}</p>
+
+                    <div className="flex items-center justify-between mt-5 pt-4 border-t border-gray-100">
+                      <span className="text-2xl font-bold text-coope-green-700">{product.price}</span>
+                      <button
+                        onClick={() => {
+                          addItem({
+                            id: i + 100,
+                            variantId: product.variantId,
+                            name: product.name,
+                            price: product.priceNumeric,
+                            image: product.image,
+                            category: product.category,
+                          });
+                          openCart();
+                          setAddedId(product.id);
+                          setTimeout(() => setAddedId(null), 1800);
+                        }}
+                        className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-bold transition-all ${
+                          addedId === product.id
+                            ? 'bg-coope-green-700 text-white gap-2'
+                            : 'bg-coope-green-600 hover:bg-coope-green-700 text-white hover:gap-2.5'
+                        }`}
+                      >
+                        {addedId === product.id ? (
+                          <><CheckCircle size={15} /> ¡Agregado!</>
+                        ) : (
+                          <>Comprar <ArrowRight size={15} /></>
+                        )}
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
 
           <motion.div {...fadeInUp} className="text-center">
             <Link
@@ -947,7 +978,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ── 9. CTA ─────────────────────────────────────────────────────── */}
+      {/* ── 10. CTA ────────────────────────────────────────────────────── */}
       <section className="py-24 bg-coope-green-950 text-white overflow-hidden relative">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-coope-green-800/30 rounded-full blur-3xl -mr-40 -mt-40 pointer-events-none" />
         <div className="container mx-auto px-4 sm:px-6 relative z-10 text-center">

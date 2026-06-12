@@ -1,9 +1,29 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Twitter, Mail, MapPin, Phone } from 'lucide-react';
+import { Facebook, Instagram, Twitter, Mail, MapPin, Phone, CheckCircle, Loader2 } from 'lucide-react';
 import { useTranslation } from '../../i18n/LanguageContext';
+import { subscribeNewsletter } from '../api/newsletter';
 
 const Footer = () => {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'ok' | 'error'>('idle');
+  const [message, setMessage] = useState('');
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    setStatus('loading');
+    try {
+      const res = await subscribeNewsletter(email, lang);
+      setStatus('ok');
+      setMessage(res.message);
+      setEmail('');
+    } catch (err: unknown) {
+      setStatus('error');
+      setMessage(err instanceof Error ? err.message : 'Error al suscribirse.');
+    }
+  };
 
   return (
     <footer className="bg-gray-950 text-gray-400 pt-16 pb-8">
@@ -76,19 +96,36 @@ const Footer = () => {
               {t('footer.newsletter_title')}
             </h3>
             <p className="text-sm text-gray-500 mb-4">{t('footer.newsletter_desc')}</p>
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-2">
-              <input
-                type="email"
-                placeholder={t('footer.newsletter_placeholder')}
-                className="w-full bg-gray-900 border border-gray-800 text-white px-4 py-2.5 rounded-lg focus:ring-2 focus:ring-coope-green-500 focus:border-transparent outline-none text-sm transition-all"
-              />
-              <button
-                type="submit"
-                className="w-full bg-coope-green-600 text-white px-4 py-2.5 rounded-lg hover:bg-coope-green-500 transition-colors text-sm font-medium"
-              >
-                {t('footer.newsletter_btn')}
-              </button>
-            </form>
+
+            {status === 'ok' ? (
+              <div className="flex items-center gap-2 text-coope-green-400 text-sm">
+                <CheckCircle className="w-4 h-4 shrink-0" />
+                <span>{message}</span>
+              </div>
+            ) : (
+              <form onSubmit={handleSubscribe} className="space-y-2">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder={t('footer.newsletter_placeholder')}
+                  required
+                  disabled={status === 'loading'}
+                  className="w-full bg-gray-900 border border-gray-800 text-white px-4 py-2.5 rounded-lg focus:ring-2 focus:ring-coope-green-500 focus:border-transparent outline-none text-sm transition-all disabled:opacity-50"
+                />
+                {status === 'error' && (
+                  <p className="text-red-400 text-xs">{message}</p>
+                )}
+                <button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  className="w-full flex items-center justify-center gap-2 bg-coope-green-600 text-white px-4 py-2.5 rounded-lg hover:bg-coope-green-500 transition-colors text-sm font-medium disabled:opacity-60"
+                >
+                  {status === 'loading' && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
+                  {t('footer.newsletter_btn')}
+                </button>
+              </form>
+            )}
           </div>
         </div>
 

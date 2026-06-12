@@ -17,7 +17,18 @@
       "Bash(curl -s -X POST http://localhost:9000/auth/user/emailpass -H 'Content-Type: application/json' -d '{\"email\":\"admin@coopehemp.cr\",\"password\":\"Admin2025!\"}')",
       "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('\\\\n'.join\\(k for k in d.get\\('dependencies',{}\\) if 'payment' in k\\)\\)\")",
       "Bash(grep -v \"^$\")",
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "Bash(grep -rn 'pk_f428ff\\\\|pk_[a-f0-9]\\\\{10,\\\\}\\\\|sk_[a-f0-9]\\\\|postgres://.*:.*@\\\\|redis://.*@' /media/barckstaz/M2/Proyectos/Coopehemp/Front-End/coopehemp/src/ /media/barckstaz/M2/Proyectos/Coopehemp/Back-End/src/)",
+      "Bash(apt list *)",
+      "Read(//usr/bin/**)",
+      "Read(//usr/lib/**)",
+      "Bash(find /usr -name \"psql\" 2>/dev/null | head -5 *)",
+      "Read(//usr/**)",
+      "Read(//opt/**)",
+      "Bash(timeout 45 node -e ' *)",
+      "Bash(curl -s http://localhost:9000/store/newsletter/subscribe -X POST -H 'Content-Type: application/json' -H 'x-publishable-api-key: pk_f428ffb93d80bd2368d5665faea75609d1ee15afdcf4195bb1a1354e34268eb7' -d '{\"email\":\"test@coopehemp.cr\",\"locale\":\"es\"}')",
+      "Bash(curl -s 'http://localhost:9000/store/products?limit=3&fields=id,title,thumbnail,variants.*,variants.calculated_price&region_id=reg_01KTT96EQ5676C5E89NBDEZZGP' -H 'x-publishable-api-key: pk_f428ffb93d80bd2368d5665faea75609d1ee15afdcf4195bb1a1354e34268eb7')",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); [print\\(p['title'], p['variants'][0].get\\('calculated_price'\\)\\) for p in d['products'][:3]]\")"
     ],
     "additionalDirectories": [
       "/media/barckstaz/M2/Proyectos/Coopehemp/Back-End/src"

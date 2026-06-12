@@ -79,14 +79,12 @@ export async function getProducts(params?: {
   limit?: number
   offset?: number
   region_id?: string
-  currency_code?: string
 }): Promise<{ products: MedusaProduct[]; count: number }> {
   const q = new URLSearchParams()
   if (params?.limit) q.set('limit', String(params.limit))
   if (params?.offset) q.set('offset', String(params.offset))
   if (params?.region_id) q.set('region_id', params.region_id)
-  if (params?.currency_code) q.set('currency_code', params.currency_code)
-  q.set('fields', 'id,title,description,thumbnail,handle,variants.*,variants.calculated_price')
+  q.set('fields', 'id,title,description,thumbnail,handle,tags.*,variants.*,variants.calculated_price')
   return storeFetch(`/products?${q.toString()}`)
 }
 
