@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//media/barckstaz/**)",
+      "Bash(mount)",
+      "Read(//media/barckstaz/M2/**)",
+      "Bash(echo \"exit:$?\")"
+    ]
+  }
+}
