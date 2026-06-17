@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); utils=d.get\\('exports',{}\\).get\\('./utils'\\); print\\(json.dumps\\(utils, indent=2\\)\\)\")",
+      "mcp__plugin_claude-mem_mcp-search__memory_add",
+      "Bash(openssl rand *)",
+      "Bash(echo \"JWT_SECRET=$\\(openssl rand -hex 32\\)\")",
+      "Bash(echo \"COOKIE_SECRET=$\\(openssl rand -hex 32\\)\")",
+      "Bash(echo \"POSTGRES_PASSWORD=$\\(openssl rand -hex 16\\)\")",
+      "Bash(git ls-files *)",
+      "Bash(python3 -c ' *)",
+      "Bash(set -e)",
+      "Bash(rm -rf __TRACKED_VAR__/.git)",
+      "Bash(mv __TRACKED_VAR__/Front-End/coopehemp/.git __TRACKED_VAR__/.git)",
+      "Bash(cd /media/barckstaz/M2/Proyectos/Coopehemp/backend && pwd && ls -la | head -20)",
+      "Read(//home/barckstaz/**)",
+      "Bash(find Back-End -mindepth 1)",
+      "Bash(rmdir Back-End)"
+    ]
+  }
+}
