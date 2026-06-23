@@ -1,3 +1,5 @@
+// Deploy: en Vercel, Root Directory = "frontend" (buildea solo el front, no el backend del monorepo).
+// Env vars en Vercel: VITE_MEDUSA_URL (túnel ngrok del backend) + VITE_MEDUSA_PUBLISHABLE_KEY.
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 
