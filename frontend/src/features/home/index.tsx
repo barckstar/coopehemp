@@ -3,20 +3,20 @@ import {
   motion,
   useScroll,
   useMotionValueEvent,
+  useTransform,
   AnimatePresence,
 } from 'framer-motion';
 import {
   ArrowRight,
+  ChevronDown,
   Leaf,
   Droplet,
   Sun,
   Users,
   Star,
   ShoppingCart,
-  Heart,
   Building2,
   CheckCircle,
-  Sprout,
   FlaskConical,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -24,6 +24,7 @@ import { useTranslation } from '../../i18n/LanguageContext';
 import { useSEO } from '../../shared/hooks/useSEO';
 import { getProducts, getRegions } from '../../shared/api/medusa-store';
 import { useCart } from '../cart/CartContext';
+import { PLANT_STAGES, MEDICAL_ITEMS } from './home.data';
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -37,133 +38,6 @@ interface FeaturedProduct {
   image: string;
   category: string;
 }
-
-const MEDICAL_BENEFITS = [
-  { icon: <Heart size={20} />, title: 'Antiinflamatorio', desc: 'El CBD inhibe las vías inflamatorias sin efectos secundarios gastrointestinales.' },
-  { icon: <CheckCircle size={20} />, title: 'Ansiolítico natural', desc: 'Reduce el cortisol y potencia los receptores GABA del sistema nervioso.' },
-  { icon: <Sprout size={20} />, title: 'Neuroprotector', desc: 'El CBG muestra efectos prometedores en neuroprotección y regeneración celular.' },
-  { icon: <Droplet size={20} />, title: 'Sin psicoactividad', desc: 'THC inferior al 0.3%. Todos los beneficios, sin efectos psicoactivos.' },
-];
-
-const COSMETIC_BENEFITS = [
-  'Imita los lípidos naturales de la piel (sebo)',
-  'Regula la producción de grasa — ideal para piel mixta',
-  'Rico en vitamina E: antioxidante potente',
-  'No comedogénico: no obstruye los poros',
-  'Apto para piel sensible, eczema y psoriasis',
-];
-
-const HEMPCRETE_STATS = [
-  { value: '−1.6 t', label: 'CO₂ capturado por m³ al año' },
-  { value: '3×', label: 'Más liviano que el concreto' },
-  { value: '100%', label: 'Biodegradable y reciclable' },
-  { value: '0', label: 'Toxinas ni VOCs emitidos' },
-];
-
-const PLANT_STAGES = [
-  {
-    id: 'semilla',
-    phase: '01',
-    icon: '🌱',
-    title: 'La Semilla',
-    subtitle: 'El superfood más completo del planeta',
-    description:
-      'Todo comienza aquí. La semilla de cáñamo concentra proteína completa con los 9 aminoácidos esenciales y omegas 3, 6 y 9 en la proporción ideal para el metabolismo humano, la misma que la leche materna.',
-    facts: [
-      '>30% proteína de alta biodisponibilidad',
-      'Omega 3:6:9 en ratio óptimo 1:3:1',
-      'Fuente de zinc, magnesio y hierro',
-      'Sin gluten · apta para veganos',
-    ],
-    image: '/hemp-hands-soil.jpg',
-    accent: '#22c55e',
-  },
-  {
-    id: 'raiz',
-    phase: '02',
-    icon: '🪴',
-    title: 'Raíz y Suelo',
-    subtitle: 'Guardiana del ecosistema',
-    description:
-      'Las raíces penetran a 2+ metros, rompiendo suelos compactados y absorbiendo metales pesados en procesos de fitorremediación activa. El cáñamo no necesita pesticidas: su química natural repele plagas.',
-    facts: [
-      'Fitorremediación: absorbe metales pesados',
-      'Sin pesticidas ni herbicidas',
-      'Mejora la biodiversidad del suelo',
-      'Captura CO₂ incluso en reposo',
-    ],
-    image: '/hands-soil-group.jpg',
-    accent: '#f59e0b',
-  },
-  {
-    id: 'fibra-bast',
-    phase: '03',
-    icon: '🧵',
-    title: 'Fibra Bast',
-    subtitle: 'La fibra más resistente de la naturaleza',
-    description:
-      'La corteza del tallo produce fibras largas y resistentes llamadas bast o cáñamon. Son la base de textiles técnicos, cuerdas industriales, papel de alta calidad y compuestos de bioingeniería para la industria automotriz.',
-    facts: [
-      '3× más resistente que el algodón',
-      'Textiles antibacterianos naturales',
-      'Papel sin talar un árbol',
-      'Bioplásticos y compuestos de ingeniería',
-    ],
-    image: '/hemp-fiber-roll.jpg',
-    accent: '#10b981',
-  },
-  {
-    id: 'agramiza',
-    phase: '04',
-    icon: '🏗️',
-    title: 'Agramiza / Hurd',
-    subtitle: 'La materia prima del Hempcrete',
-    description:
-      'La médula leñosa interior del tallo se mezcla con cal hidráulica para producir Hempcrete: un material de construcción que se vuelve más resistente con el tiempo, es ignífugo, antibacterial y captura carbono de forma permanente.',
-    facts: [
-      'Captura 1.6 t de CO₂ por m³/año',
-      'Aislamiento térmico y acústico superior',
-      'Ignífugo y resistente a plagas',
-      'Proyecto estrella de los asociados',
-    ],
-    image: '/hemp-field.jpg',
-    accent: '#94a3b8',
-  },
-  {
-    id: 'flor',
-    phase: '05',
-    icon: '🌸',
-    title: 'La Flor',
-    subtitle: 'La farmacia más compleja de la naturaleza',
-    description:
-      'Los tricomas de la flor sintetizan más de 100 cannabinoides distintos. CBD, CBG, CBN y terpenos trabajan en sinergia — el "efecto entourage" — potenciando exponencialmente cada beneficio terapéutico.',
-    facts: [
-      'CBD: antiinflamatorio y ansiolítico',
-      'CBG: neuroprotector emergente',
-      'Terpenos: aromaterapia terapéutica',
-      'THC <0.3% — sin psicoactividad',
-    ],
-    image: '/hemp-leaves-vertical.jpg',
-    accent: '#a855f7',
-  },
-  {
-    id: 'extraccion',
-    phase: '06',
-    icon: '💧',
-    title: 'Extracción & Productos',
-    subtitle: 'De la planta al consumidor final',
-    description:
-      'Mediante extracción por CO₂ supercrítico, prensado en frío y procesos artesanales certificados, transformamos cada parte de la planta en productos de la más alta calidad para salud, cosmética y construcción.',
-    facts: [
-      'Aceites CBD espectro completo',
-      'Cremas y cosméticos naturales',
-      'Hempcrete para construcción sostenible',
-      'Superfoods y suplementos deportivos',
-    ],
-    image: '/hemp-oil.jpg',
-    accent: '#14b8a6',
-  },
-];
 
 // ─── SEO Structured Data ───────────────────────────────────────────────────────
 
@@ -179,27 +53,18 @@ const HOME_LD = {
   about: { '@id': 'https://coopehemp.cr/#organization' },
 };
 
-// ─── PlantJourney — flip 3D en eje Y por fase ────────────────────────────────
+// ─── PlantJourney — scrub de frames + cards por fase ─────────────────────────
 
-const IMG_VARIANTS = {
-  enter: (dir: number) => ({
-    rotateY: dir * -90,
-    opacity: 0,
-    scale: 0.96,
-  }),
-  center: {
-    rotateY: 0,
-    opacity: 1,
-    scale: 1,
-  },
-  exit: (dir: number) => ({
-    rotateY: dir * 90,
-    opacity: 0,
-    scale: 0.96,
-  }),
-};
-
-const IMG_TRANSITION = { duration: 0.55, ease: [0.4, 0, 0.2, 1] as const };
+// Secuencia de frames (placeholder generado): la planta "madura" de forma
+// continua con el scroll. 60 frames ÷ 6 fases = 10 frames por card.
+// Para usar los reales: reemplazar los .svg en /public/frames por .webp y
+// cambiar la extensión aquí.
+const TOTAL_FRAMES = 60;
+const FRAMES_PER_STAGE = TOTAL_FRAMES / PLANT_STAGES.length;
+const FRAME_SRCS = Array.from(
+  { length: TOTAL_FRAMES },
+  (_, i) => `/frames/frame-${String(i + 1).padStart(2, '0')}.svg`
+);
 
 const TEXT_VARIANTS = {
   enter: (dir: number) => ({ opacity: 0, y: dir * 20 }),
@@ -210,8 +75,10 @@ const TEXT_VARIANTS = {
 const TEXT_TRANSITION = { duration: 0.3, ease: 'easeOut' as const };
 
 const PlantJourney = () => {
+  const { t, tRaw } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeStage, setActiveStage] = useState(0);
+  const [frame, setFrame] = useState(0);
   const prevProgress = useRef(0);
   const direction = useRef(1); // 1 = scroll ↓, -1 = scroll ↑
 
@@ -220,37 +87,133 @@ const PlantJourney = () => {
     offset: ['start start', 'end end'],
   });
 
+  // Relleno continuo del tallo: refleja el scroll exactamente (0 → 100%)
+  const growth = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+
+  // Precargar todos los frames para que el scrub sea instantáneo (sin parpadeo).
+  useEffect(() => {
+    FRAME_SRCS.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
+
   useMotionValueEvent(scrollYProgress, 'change', (v) => {
     direction.current = v >= prevProgress.current ? 1 : -1;
     prevProgress.current = v;
-    const stage = Math.min(PLANT_STAGES.length - 1, Math.floor(v * PLANT_STAGES.length));
+    // Frame continuo (0 → 59) ligado al scroll: la imagen "madura" al scrollear.
+    const idx = Math.min(TOTAL_FRAMES - 1, Math.round(v * (TOTAL_FRAMES - 1)));
+    setFrame(idx);
+    // La card de texto cambia cada 10 frames.
+    const stage = Math.min(
+      PLANT_STAGES.length - 1,
+      Math.floor(idx / FRAMES_PER_STAGE)
+    );
     setActiveStage(stage);
   });
 
-  const current = PLANT_STAGES[activeStage];
+  // Saltar directo a una fase (para quien no quiere recorrer todo el scroll)
+  const goToStage = (i: number) => {
+    const el = containerRef.current;
+    if (!el) return;
+    const target =
+      el.offsetTop +
+      ((i + 0.5) / PLANT_STAGES.length) * (el.offsetHeight - window.innerHeight);
+    window.scrollTo({ top: Math.max(0, target), behavior: 'smooth' });
+  };
+
+  const total = PLANT_STAGES.length;
+  const base = PLANT_STAGES[activeStage];
+  const current = {
+    ...base,
+    title: t(`home.stages.${base.id}.title`),
+    subtitle: t(`home.stages.${base.id}.subtitle`),
+    description: t(`home.stages.${base.id}.description`),
+    facts: tRaw<string[]>(`home.stages.${base.id}.facts`) ?? [],
+  };
+  // eslint-disable-next-line react-hooks/refs -- lectura intencional de la dirección de scroll para la animación
   const dir = direction.current;
 
   return (
     <section
       ref={containerRef}
       aria-label="Anatomía de la Planta de Cáñamo"
-      style={{ minHeight: `${PLANT_STAGES.length * 100}vh` }}
+      style={{ minHeight: `${total * 100}svh` }}
     >
-      <div className="sticky top-0 h-screen overflow-hidden flex flex-col lg:flex-row">
+      <div className="sticky top-0 h-[100svh] overflow-hidden flex flex-col lg:flex-row bg-coope-green-950">
 
-        {/* ── Panel izquierdo / superior (móvil): texto ── */}
-        <div className="flex flex-col justify-center px-6 sm:px-10 lg:px-14 py-10 lg:py-0
-                        bg-coope-green-950 lg:w-[44%] flex-shrink-0 relative z-10
-                        h-[48%] lg:h-full">
+        {/* ════ BARRA SUPERIOR (solo móvil): progreso ligado al scroll ════ */}
+        <div className="lg:hidden flex-shrink-0 px-5 pt-4 pb-3 bg-coope-green-950 z-20">
+          <div className="flex items-center justify-between mb-2.5">
+            <p className="text-white/40 font-bold tracking-widest uppercase text-[10px]">
+              {t('home.anatomy')}
+            </p>
+            <p className="text-white font-bold text-xs tabular-nums">
+              <span style={{ color: current.accent }}>{current.phase}</span>
+              <span className="text-white/30"> / 0{total}</span>
+            </p>
+          </div>
+          <div className="relative h-[3px] w-full rounded-full bg-white/15 overflow-hidden">
+            <motion.div
+              className="absolute left-0 top-0 h-full rounded-full"
+              style={{ width: growth, backgroundColor: current.accent }}
+            />
+          </div>
+        </div>
 
-          {/* Línea de acento con color de la fase */}
+        {/* ════ RIEL-TALLO (solo desktop): el cáñamo crece al scrollear ════ */}
+        <div className="hidden lg:flex flex-col items-center justify-center w-20 flex-shrink-0 bg-coope-green-950 relative z-20">
+          <div className="relative h-[64%] w-[3px] rounded-full bg-white/12">
+            {/* tallo que crece con el scroll */}
+            <motion.div
+              className="absolute left-0 top-0 w-full rounded-full bg-gradient-to-b from-coope-green-400 to-coope-green-600"
+              style={{ height: growth }}
+            />
+            {/* brote en la punta del tallo */}
+            <motion.div
+              className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm select-none pointer-events-none"
+              style={{ top: growth }}
+            >
+              🌱
+            </motion.div>
+            {/* nodos clickeables de cada fase */}
+            {PLANT_STAGES.map((s, i) => {
+              const reached = i <= activeStage;
+              return (
+                <button
+                  key={s.id}
+                  onClick={() => goToStage(i)}
+                  aria-label={`${t('home.phase')} ${s.phase}: ${t(`home.stages.${s.id}.title`)}`}
+                  className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-7 h-7 rounded-full flex items-center justify-center text-[11px] border transition-all duration-500 hover:scale-125"
+                  style={{
+                    top: `${((i + 0.5) / total) * 100}%`,
+                    backgroundColor: reached ? s.accent : 'rgba(8,35,22,1)',
+                    borderColor: reached ? s.accent : 'rgba(255,255,255,0.2)',
+                    boxShadow: i === activeStage ? `0 0 0 4px ${s.accent}33` : 'none',
+                  }}
+                >
+                  <span className={reached ? 'opacity-100' : 'opacity-40'}>{s.icon}</span>
+                </button>
+              );
+            })}
+          </div>
+          <span className="absolute bottom-6 text-white/25 text-[9px] font-bold tracking-[0.25em] uppercase [writing-mode:vertical-rl]">
+            {t('home.scroll')}
+          </span>
+        </div>
+
+        {/* ── Panel de texto ── */}
+        <div className="flex flex-col justify-center px-6 sm:px-10 lg:px-14 py-5 lg:py-0
+                        bg-coope-green-950 lg:w-[42%] flex-shrink-0 relative z-10
+                        flex-1 lg:flex-none min-h-0 overflow-hidden">
+
           <div
-            className="w-10 h-[3px] rounded-full mb-7 transition-colors duration-500"
+            className="hidden lg:block w-10 h-[3px] rounded-full mb-7 transition-colors duration-500"
             style={{ backgroundColor: current.accent }}
           />
 
-          <p className="text-white/35 font-bold tracking-widest uppercase text-[10px] mb-5">
-            Anatomía del Cáñamo &nbsp;·&nbsp; {current.phase} / {PLANT_STAGES.length}
+          <p className="hidden lg:block text-white/35 font-bold tracking-widest uppercase text-[10px] mb-5">
+            {t('home.anatomy')} &nbsp;·&nbsp; {current.phase} / 0{total}
           </p>
 
           <AnimatePresence mode="wait" custom={dir}>
@@ -265,28 +228,28 @@ const PlantJourney = () => {
             >
               {/* Badge de fase */}
               <div
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-white text-xs font-bold mb-5 border"
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-white text-xs font-bold mb-4 lg:mb-5 border"
                 style={{
                   backgroundColor: current.accent + '22',
                   borderColor: current.accent + '55',
                 }}
               >
                 <span className="text-base leading-none">{current.icon}</span>
-                Fase {current.phase}
+                {t('home.phase')} {current.phase}
               </div>
 
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-1.5 leading-tight">
                 {current.title}
               </h2>
-              <p className="text-sm font-semibold mb-4 transition-colors duration-500"
+              <p className="text-sm font-semibold mb-3 lg:mb-4 transition-colors duration-500"
                  style={{ color: current.accent }}>
                 {current.subtitle}
               </p>
-              <p className="text-white/65 text-sm leading-relaxed mb-5 line-clamp-4 lg:line-clamp-none">
+              <p className="text-white/65 text-sm leading-relaxed mb-4 lg:mb-5 line-clamp-3 sm:line-clamp-4 lg:line-clamp-none">
                 {current.description}
               </p>
 
-              <ul className="space-y-2">
+              <ul className="space-y-1.5 lg:space-y-2">
                 {current.facts.map((fact, i) => (
                   <li key={i} className="flex items-start gap-2.5 text-white/75 text-xs sm:text-sm">
                     <span
@@ -299,77 +262,82 @@ const PlantJourney = () => {
               </ul>
             </motion.div>
           </AnimatePresence>
-
-          {/* Barra de progreso por fase */}
-          <div className="flex gap-1.5 mt-8">
-            {PLANT_STAGES.map((s, i) => (
-              <div
-                key={s.id}
-                className="h-[3px] rounded-full transition-all duration-500"
-                style={{
-                  width: i === activeStage ? '2rem' : '0.375rem',
-                  backgroundColor: i === activeStage ? current.accent : 'rgba(255,255,255,0.18)',
-                }}
-              />
-            ))}
-          </div>
         </div>
 
-        {/* ── Panel derecho / inferior (móvil): imagen con flip 3D ── */}
-        <div
-          className="flex-1 relative overflow-hidden h-[52%] lg:h-full"
-          style={{ perspective: '1400px' }}
-        >
-          <AnimatePresence mode="wait" custom={dir}>
-            <motion.div
-              key={activeStage}
-              custom={dir}
-              variants={IMG_VARIANTS}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={IMG_TRANSITION}
-              style={{ transformOrigin: 'center center' }}
-              className="absolute inset-0"
-            >
-              <img
-                src={current.image}
-                alt={current.title}
-                className="w-full h-full object-cover"
-              />
+        {/* ── Panel de imagen: scrub de frames ligado al scroll ── */}
+        <div className="flex-1 relative overflow-hidden h-[42%] lg:h-full min-h-0">
+          {/* Secuencia de frames: la imagen "madura" de forma continua al scrollear */}
+          <img
+            src={FRAME_SRCS[frame]}
+            alt={current.title}
+            className="absolute inset-0 w-full h-full object-cover select-none"
+            draggable={false}
+          />
 
-              {/* Tinte de color de fase sobre la imagen */}
-              <div
-                className="absolute inset-0 transition-colors duration-700 mix-blend-color"
-                style={{ backgroundColor: current.accent + '40' }}
-              />
+          {/* Tinte de color de fase sobre la imagen */}
+          <div
+            className="absolute inset-0 transition-colors duration-700 mix-blend-color pointer-events-none"
+            style={{ backgroundColor: current.accent + '40' }}
+          />
 
-              {/* Fusión con el panel de texto en desktop */}
-              <div className="absolute inset-0 bg-gradient-to-r from-coope-green-950/70 lg:from-coope-green-950/20 via-transparent to-transparent" />
+          {/* Fusión con el panel de texto en desktop */}
+          <div className="absolute inset-0 bg-gradient-to-r from-coope-green-950/70 lg:from-coope-green-950/20 via-transparent to-transparent pointer-events-none" />
 
-              {/* Número de fase en esquina (decorativo) */}
-              <div
-                className="absolute bottom-5 right-5 font-black text-7xl sm:text-8xl leading-none
-                           select-none pointer-events-none opacity-10 transition-colors duration-500"
-                style={{ color: current.accent }}
+          {/* Número de fase en esquina (decorativo) */}
+          <div
+            className="absolute bottom-5 right-5 font-black text-7xl sm:text-8xl leading-none
+                       select-none pointer-events-none opacity-10 transition-colors duration-500"
+            style={{ color: current.accent }}
+          >
+            {current.phase}
+          </div>
+
+          {/* ════ AVISO DE ENTRADA: "seguí bajando" — solo en la 1ª fase ════ */}
+          <AnimatePresence>
+            {activeStage === 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 16 }}
+                transition={{ duration: 0.4 }}
+                className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 pointer-events-none px-4"
               >
-                {current.phase}
-              </div>
-            </motion.div>
+                <div className="bg-black/45 backdrop-blur-md border border-white/20 rounded-full px-5 py-2.5 shadow-xl">
+                  <span className="text-white text-xs sm:text-sm font-semibold whitespace-nowrap">
+                    {t('home.keep_scrolling', { n: String(total) })}
+                  </span>
+                </div>
+                <motion.div
+                  animate={{ y: [0, 7, 0] }}
+                  transition={{ repeat: Infinity, duration: 1.4 }}
+                  className="flex flex-col items-center -space-y-2 text-white/90"
+                >
+                  <ChevronDown size={22} strokeWidth={2.5} />
+                  <ChevronDown size={22} strokeWidth={2.5} className="opacity-40" />
+                </motion.div>
+              </motion.div>
+            )}
           </AnimatePresence>
 
-          {/* Indicador de scroll */}
-          {activeStage < PLANT_STAGES.length - 1 && (
-            <div className="absolute bottom-4 right-5 z-10 pointer-events-none">
+          {/* ════ AVISO DE SALIDA: fin del recorrido ════ */}
+          <AnimatePresence>
+            {activeStage === total - 1 && (
               <motion.div
-                animate={{ y: [0, 5, 0] }}
-                transition={{ repeat: Infinity, duration: 1.6 }}
-                className="text-white/30 text-xs uppercase tracking-widest text-right"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 16 }}
+                transition={{ duration: 0.4 }}
+                className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 pointer-events-none px-4"
               >
-                scroll ↓
+                <div className="bg-black/45 backdrop-blur-md border border-white/20 rounded-full px-5 py-2.5 flex items-center gap-2 shadow-xl">
+                  <CheckCircle size={15} className="text-coope-green-300" />
+                  <span className="text-white text-xs sm:text-sm font-semibold whitespace-nowrap">
+                    Recorrido completo · seguí para ver más
+                  </span>
+                </div>
               </motion.div>
-            </div>
-          )}
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </section>
@@ -388,7 +356,7 @@ const fadeInUp = {
 // ─── Main Component ────────────────────────────────────────────────────────────
 
 const Home = () => {
-  const { t } = useTranslation();
+  const { t, tRaw } = useTranslation();
   const { addItem, openCart } = useCart();
   const [featuredProducts, setFeaturedProducts] = useState<FeaturedProduct[]>([]);
   const [addedId, setAddedId] = useState<string | null>(null);
@@ -418,10 +386,10 @@ const Home = () => {
                   minimumFractionDigits: 0,
                   maximumFractionDigits: 0,
                 }).format(priceNum)
-              : 'Consultar precio',
+              : t('home.price_ask'),
             priceNumeric: priceNum,
             image: p.thumbnail ?? '/hemp-plant.jpg',
-            category: p.tags?.[0]?.value ?? 'Producto',
+            category: p.tags?.[0]?.value ?? t('home.category_fallback'),
           };
         }));
       } catch {
@@ -463,7 +431,7 @@ const Home = () => {
             transition={{ duration: 0.6 }}
             className="text-coope-green-300 font-semibold tracking-widest uppercase text-sm mb-6"
           >
-            Costa Rica · CoopeHemp R.L.
+            {t('home.hero_tag')}
           </motion.p>
 
           <motion.h1
@@ -495,7 +463,7 @@ const Home = () => {
               to="/productos"
               className="bg-coope-green-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-coope-green-700 transition-all hover:scale-105 shadow-xl shadow-coope-green-900/30 flex items-center justify-center gap-2"
             >
-              <ShoppingCart size={20} /> Ver Productos
+              <ShoppingCart size={20} /> {t('home.hero_cta_products')}
             </Link>
             <Link
               to="/about"
@@ -522,13 +490,13 @@ const Home = () => {
         <div className="container mx-auto px-4 sm:px-6">
           <motion.div {...fadeInUp} className="text-center max-w-3xl mx-auto mb-16">
             <p className="text-coope-green-600 font-bold tracking-widest uppercase text-sm mb-3">
-              Tienda CoopeHemp
+              {t('home.showcase_label')}
             </p>
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Productos que transforman tu bienestar
+              {t('home.showcase_title')}
             </h2>
             <p className="text-gray-500 text-lg">
-              Formulados con cáñamo 100% orgánico cultivado por nuestros asociados en Costa Rica.
+              {t('home.showcase_sub')}
             </p>
           </motion.div>
 
@@ -588,9 +556,9 @@ const Home = () => {
                         }`}
                       >
                         {addedId === product.id ? (
-                          <><CheckCircle size={15} /> ¡Agregado!</>
+                          <><CheckCircle size={15} /> {t('home.added')}</>
                         ) : (
-                          <>Comprar <ArrowRight size={15} /></>
+                          <>{t('home.buy')} <ArrowRight size={15} /></>
                         )}
                       </button>
                     </div>
@@ -605,7 +573,7 @@ const Home = () => {
               to="/productos"
               className="inline-flex items-center gap-2 border-2 border-coope-green-600 text-coope-green-700 hover:bg-coope-green-600 hover:text-white px-8 py-4 rounded-full font-bold text-base transition-all group"
             >
-              Ver catálogo completo
+              {t('home.showcase_all')}
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
@@ -635,8 +603,8 @@ const Home = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-coope-green-950/80 to-transparent flex items-end p-8">
                   <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20">
-                    <p className="text-white text-sm font-medium">+20,000 estudios científicos</p>
-                    <p className="text-coope-green-300 text-xs mt-0.5">respaldan los beneficios del CBD</p>
+                    <p className="text-white text-sm font-medium">{t('home.medical_badge1')}</p>
+                    <p className="text-coope-green-300 text-xs mt-0.5">{t('home.medical_badge2')}</p>
                   </div>
                 </div>
               </div>
@@ -652,40 +620,40 @@ const Home = () => {
             >
               <div className="flex flex-col gap-1 mb-4">
                 <p className="text-gray-400 font-semibold tracking-widest uppercase text-[10px]">
-                  Proyecto · Asociados CoopeHemp
+                  {t('home.project_label')}
                 </p>
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 bg-red-50 rounded-lg flex items-center justify-center">
                     <FlaskConical size={18} className="text-red-500" />
                   </div>
                   <p className="text-red-500 font-bold tracking-widest uppercase text-sm">
-                    Cáñamo Medicinal
+                    {t('home.medical_label')}
                   </p>
                 </div>
               </div>
 
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-5 leading-tight">
-                El poder terapéutico{' '}
-                <span className="text-coope-green-600">del CBD</span>
+                {t('home.medical_title1')}{' '}
+                <span className="text-coope-green-600">{t('home.medical_title2')}</span>
               </h2>
 
               <p className="text-gray-600 text-lg leading-relaxed mb-4">
-                El sistema endocannabinoide — presente en cada ser humano — regula el dolor, el estado de ánimo, el sueño y la respuesta inmune. El CBD activa sus receptores sin producir dependencia ni efectos psicoactivos.
+                {t('home.medical_p1')}
               </p>
               <p className="text-gray-500 text-base leading-relaxed mb-8">
-                Nuestros aceites de espectro completo preservan todos los cannabinoides, terpenos y flavonoides de la flor, potenciando el "efecto entourage" para resultados superiores.
+                {t('home.medical_p2')}
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                {MEDICAL_BENEFITS.map((benefit, i) => (
+                {MEDICAL_ITEMS.map((benefit) => (
                   <div
-                    key={i}
+                    key={benefit.id}
                     className="flex gap-3 p-4 bg-gray-50 rounded-2xl hover:bg-coope-green-50 transition-colors"
                   >
                     <div className="text-coope-green-600 mt-0.5 flex-shrink-0">{benefit.icon}</div>
                     <div>
-                      <p className="font-bold text-gray-900 text-sm mb-0.5">{benefit.title}</p>
-                      <p className="text-gray-500 text-xs leading-relaxed">{benefit.desc}</p>
+                      <p className="font-bold text-gray-900 text-sm mb-0.5">{t(`home.medical_items.${benefit.id}.title`)}</p>
+                      <p className="text-gray-500 text-xs leading-relaxed">{t(`home.medical_items.${benefit.id}.desc`)}</p>
                     </div>
                   </div>
                 ))}
@@ -695,7 +663,7 @@ const Home = () => {
                 to="/productos"
                 className="inline-flex items-center gap-2 bg-coope-green-600 hover:bg-coope-green-700 text-white px-7 py-3.5 rounded-full font-bold transition-all hover:gap-3 group"
               >
-                Ver aceites terapéuticos
+                {t('home.medical_cta')}
                 <ArrowRight size={18} className="group-hover:translate-x-0.5 transition-transform" />
               </Link>
             </motion.div>
@@ -749,32 +717,32 @@ const Home = () => {
             >
               <div className="flex flex-col gap-1 mb-4">
                 <p className="text-gray-400 font-semibold tracking-widest uppercase text-[10px]">
-                  Proyecto · Asociados CoopeHemp
+                  {t('home.project_label')}
                 </p>
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 bg-pink-50 rounded-lg flex items-center justify-center">
                     <Leaf size={18} className="text-pink-500" />
                   </div>
                   <p className="text-pink-500 font-bold tracking-widest uppercase text-sm">
-                    Cosmética Natural
+                    {t('home.cosmetic_label')}
                   </p>
                 </div>
               </div>
 
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-5 leading-tight">
-                Tu piel merece{' '}
-                <span className="text-coope-green-600">lo mejor de la naturaleza</span>
+                {t('home.cosmetic_title1')}{' '}
+                <span className="text-coope-green-600">{t('home.cosmetic_title2')}</span>
               </h2>
 
               <p className="text-gray-600 text-lg leading-relaxed mb-4">
-                El aceite de semilla de cáñamo tiene un perfil lipídico que imita los lípidos naturales del manto dérmico, lo que lo hace excepcionalmente compatible con la piel humana — hidrata sin obstruir ni alterar el microbioma cutáneo.
+                {t('home.cosmetic_p1')}
               </p>
               <p className="text-gray-500 text-base leading-relaxed mb-8">
-                Nuestra línea cosmética está libre de parabenos, sulfatos y silicones. Solo activos naturales que respetan tu piel y el planeta.
+                {t('home.cosmetic_p2')}
               </p>
 
               <ul className="space-y-3 mb-8">
-                {COSMETIC_BENEFITS.map((benefit, i) => (
+                {(tRaw<string[]>('home.cosmetic_benefits') ?? []).map((benefit, i) => (
                   <li key={i} className="flex items-center gap-3 text-gray-700 text-sm">
                     <CheckCircle size={16} className="text-coope-green-500 flex-shrink-0" />
                     {benefit}
@@ -786,7 +754,7 @@ const Home = () => {
                 to="/productos"
                 className="inline-flex items-center gap-2 bg-pink-500 hover:bg-pink-600 text-white px-7 py-3.5 rounded-full font-bold transition-all hover:gap-3 group"
               >
-                Explorar línea cosmética
+                {t('home.cosmetic_cta')}
                 <ArrowRight size={18} className="group-hover:translate-x-0.5 transition-transform" />
               </Link>
             </motion.div>
@@ -817,24 +785,24 @@ const Home = () => {
                   <Building2 size={18} className="text-amber-400" />
                 </div>
                 <p className="text-amber-400 font-bold tracking-widest uppercase text-sm">
-                  Proyecto · Asociados CoopeHemp
+                  {t('home.project_label')}
                 </p>
               </div>
 
               <h2 className="text-4xl md:text-5xl font-bold mb-5 leading-tight">
-                Hempcrete:{' '}
-                <span className="text-amber-400">Construir con la naturaleza</span>
+                {t('home.hempcrete_title1')}{' '}
+                <span className="text-amber-400">{t('home.hempcrete_title2')}</span>
               </h2>
 
               <p className="text-gray-300 text-lg leading-relaxed mb-4">
-                La agramiza (médula del tallo de cáñamo) mezclada con cal hidráulica produce Hempcrete: un material de construcción biocompuesto que es más liviano que el concreto, secuestra carbono de forma permanente y mejora con el tiempo.
+                {t('home.hempcrete_p1')}
               </p>
               <p className="text-gray-400 text-base leading-relaxed mb-10">
-                Mientras el concreto convencional emite CO₂, el Hempcrete lo captura. Es el único material de construcción con huella de carbono negativa, volviéndose más resistente cada año gracias a la mineralización natural de la cal.
+                {t('home.hempcrete_p2')}
               </p>
 
               <div className="grid grid-cols-2 gap-4 mb-10">
-                {HEMPCRETE_STATS.map((stat, i) => (
+                {(tRaw<{ value: string; label: string }[]>('home.hempcrete_stats') ?? []).map((stat, i) => (
                   <motion.div
                     key={i}
                     initial={{ opacity: 0, y: 20 }}
@@ -853,7 +821,7 @@ const Home = () => {
                 to="/contacto"
                 className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-gray-900 px-7 py-3.5 rounded-full font-bold transition-all hover:gap-3 group"
               >
-                Conocer el proyecto
+                {t('home.hempcrete_cta')}
                 <ArrowRight size={18} className="group-hover:translate-x-0.5 transition-transform" />
               </Link>
             </motion.div>
@@ -866,23 +834,7 @@ const Home = () => {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="lg:w-1/2 flex flex-col gap-5"
             >
-              {[
-                {
-                  icon: '🌿',
-                  title: 'Agramiza de cáñamo',
-                  desc: 'La médula leñosa del tallo triturada — el 70% de la biomasa de la planta — se mezcla con cal para crear el compuesto.',
-                },
-                {
-                  icon: '🏗️',
-                  title: 'Carbonatación natural',
-                  desc: 'Con el tiempo la cal reacciona con el CO₂ del aire y con el sílice de la agramiza, volviéndose pietra — piedra — cada vez más dura.',
-                },
-                {
-                  icon: '♻️',
-                  title: 'Ciclo de vida completo',
-                  desc: 'Al final de su vida útil, el Hempcrete puede compostarse, volviéndose abono para nuevos cultivos de cáñamo.',
-                },
-              ].map((item, i) => (
+              {(tRaw<{ icon: string; title: string; desc: string }[]>('home.hempcrete_cards') ?? []).map((item, i) => (
                 <div
                   key={i}
                   className="flex gap-4 bg-white/5 border border-white/10 rounded-2xl p-5 hover:bg-white/10 transition-colors"
@@ -945,7 +897,7 @@ const Home = () => {
                   className="w-full h-[500px] object-cover hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
-                  <p className="text-white text-lg font-medium">Más de 50 familias productoras</p>
+                  <p className="text-white text-lg font-medium">{t('home.mission_caption')}</p>
                 </div>
               </div>
             </motion.div>
@@ -995,7 +947,7 @@ const Home = () => {
               to="/productos"
               className="inline-flex items-center gap-2 bg-coope-green-800 hover:bg-coope-green-700 text-white px-8 py-4 rounded-full font-bold text-lg transition-colors"
             >
-              <ShoppingCart size={20} /> Tienda
+              <ShoppingCart size={20} /> {t('home.cta_store')}
             </Link>
           </div>
         </div>

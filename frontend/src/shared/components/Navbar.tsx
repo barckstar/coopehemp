@@ -11,6 +11,8 @@ const Navbar = () => {
   const { totalItems, toggleCart } = useCart();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const lastScrollY = useRef(0);
   const [cooperativeOpen, setCooperativeOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const closeMenu = () => { setIsOpen(false); setCooperativeOpen(false); };
@@ -20,8 +22,17 @@ const Navbar = () => {
   const { t, lang, setLang } = useTranslation();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 20);
+      // Auto-hide: se esconde al bajar, reaparece al subir.
+      // Umbral de 6px para ignorar micro-scroll, y siempre visible cerca del tope.
+      if (Math.abs(y - lastScrollY.current) > 6) {
+        setHidden(y > lastScrollY.current && y > 80);
+        lastScrollY.current = y;
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -41,6 +52,7 @@ const Navbar = () => {
 
   // Close mobile menu on navigation
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- cierra el menú al navegar (sincroniza con la ruta)
     setIsOpen(false);
     setCooperativeOpen(false);
   }, [location.pathname]);
@@ -60,7 +72,15 @@ const Navbar = () => {
   ];
 
   const isCooperativePath = ['/about', '/directorio', '/transparencia'].includes(location.pathname);
-  const textColor = scrolled ? 'text-gray-700' : 'text-white/90';
+  // El navbar es transparente (texto blanco) SOLO sobre páginas con hero oscuro.
+  // En el resto (mapa, directorio, transparencia, checkout, 404…) va sólido para
+  // que el texto se lea sobre fondo claro.
+  const darkHero =
+    location.pathname === '/' ||
+    location.pathname.startsWith('/blog') ||
+    ['/about', '/contacto', '/contact', '/productos', '/products'].includes(location.pathname);
+  const solid = scrolled || !darkHero;
+  const textColor = solid ? 'text-gray-700' : 'text-white/90';
   const activeColor = 'text-coope-green-500';
 
   const languages: { code: Language; label: string; flag: string }[] = [
@@ -72,7 +92,9 @@ const Navbar = () => {
     <nav
       className={clsx(
         'fixed w-full z-50 transition-all duration-300',
-        scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-5'
+        solid ? 'bg-white/95 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-5',
+        // Se oculta al bajar; si el menú móvil está abierto, siempre visible.
+        hidden && !isOpen ? '-translate-y-full' : 'translate-y-0'
       )}
     >
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
@@ -80,7 +102,7 @@ const Navbar = () => {
         <Link to="/" className="flex items-center gap-2.5 group shrink-0">
           <span className={clsx(
             'text-xl font-bold tracking-tight transition-colors hidden sm:block',
-            scrolled ? 'text-gray-900' : 'text-white'
+            solid ? 'text-gray-900' : 'text-white'
           )}>
             CoopeHemp
           </span>
@@ -237,7 +259,7 @@ const Navbar = () => {
             onClick={() => setLang(lang === 'es' ? 'en' : 'es')}
             className={clsx(
               'flex items-center gap-1 text-xs font-bold px-2 py-1 rounded-md border transition-colors',
-              scrolled ? 'border-gray-300 text-gray-700' : 'border-white/40 text-white'
+              solid ? 'border-gray-300 text-gray-700' : 'border-white/40 text-white'
             )}
           >
             <Globe size={12} />
@@ -249,7 +271,7 @@ const Navbar = () => {
             onClick={toggleCart}
             className={clsx(
               'relative flex items-center justify-center w-8 h-8 rounded-full transition-colors',
-              scrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/10'
+              solid ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/10'
             )}
             aria-label="Carrito"
           >
@@ -262,8 +284,9 @@ const Navbar = () => {
           </button>
 
           <button
-            className={clsx('p-1', scrolled ? 'text-gray-900' : 'text-white')}
+            className={clsx('p-1', solid ? 'text-gray-900' : 'text-white')}
             onClick={() => setIsOpen(!isOpen)}
+            aria-label={t('a11y.menu')}
           >
             {isOpen ? <X size={22} /> : <Menu size={22} />}
           </button>

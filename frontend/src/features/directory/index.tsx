@@ -114,7 +114,7 @@ const Directory = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-white border-b border-gray-100 shadow-sm sticky top-[60px] z-20">
+      <div className="bg-white border-b border-gray-100 shadow-sm sticky top-0 z-20">
         <div className="max-w-6xl mx-auto px-4 py-3 flex flex-col sm:flex-row gap-3">
           <div className="relative flex-1 max-w-sm">
             <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />

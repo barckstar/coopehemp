@@ -360,6 +360,16 @@ export default async function seedCommerce({ container }: { container: MedusaCon
 
       console.log(`   ✓ ${product.title} (${product.variants?.length ?? 0} variantes)`)
 
+      // Vincular el producto al sales channel — SIN esto la Store API no lo devuelve
+      try {
+        await remoteLink.create([{
+          [Modules.PRODUCT]:       { product_id: product.id },
+          [Modules.SALES_CHANNEL]: { sales_channel_id: salesChannel.id },
+        }])
+      } catch (_) {
+        // el link ya puede existir en re-ejecuciones
+      }
+
       // Para cada variante: price set + inventory item
       for (const pVariant of (product.variants ?? [])) {
         const seedVariant = p.variants.find((v) => v.sku === pVariant.sku)

@@ -43,10 +43,10 @@ const Contact = () => {
     };
 
     const marketData = [
-        { year: '2024', value: '$1000 M', label: 'Estimado', raw: 1000 },
-        { year: '2028', value: '$4000 M', label: 'Proyección', raw: 4000 },
-        { year: '2032', value: '$8000 M', label: 'Proyección', raw: 8000 },
-        { year: '2035', value: '$13300 M', label: 'Futuro', raw: 13300 },
+        { year: '2024', value: '$1000 M', label: t('contact.market_estimated'), raw: 1000 },
+        { year: '2028', value: '$4000 M', label: t('contact.market_projection'), raw: 4000 },
+        { year: '2032', value: '$8000 M', label: t('contact.market_projection'), raw: 8000 },
+        { year: '2035', value: '$13300 M', label: t('contact.market_future'), raw: 13300 },
     ];
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -103,7 +103,7 @@ const Contact = () => {
                                     <div className="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center text-green-600 mb-4">
                                         <Mail className="w-6 h-6" />
                                     </div>
-                                    <h3 className="font-semibold text-neutral-900 mb-1">Email</h3>
+                                    <h3 className="font-semibold text-neutral-900 mb-1">{t('contact.email_label')}</h3>
                                     <a href="mailto:info@coopehemp.com" className="text-green-700 hover:text-green-800 transition-colors">
                                         info@coopehemp.com
                                     </a>
@@ -113,7 +113,7 @@ const Contact = () => {
                                     <div className="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center text-green-600 mb-4">
                                         <Phone className="w-6 h-6" />
                                     </div>
-                                    <h3 className="font-semibold text-neutral-900 mb-1">{t('contact.field_name')}</h3>
+                                    <h3 className="font-semibold text-neutral-900 mb-1">{t('contact.phone_label')}</h3>
                                     <a href="tel:+50600000000" className="text-green-700 hover:text-green-800 transition-colors">
                                         +506 0000-0000
                                     </a>
@@ -125,9 +125,9 @@ const Contact = () => {
                                     <MapPin className="w-6 h-6" />
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-neutral-900 mb-1">Ubicación</h3>
-                                    <p className="text-neutral-600">Costa Rica</p>
-                                    <p className="text-neutral-500 text-sm mt-1">Oficinas Centrales</p>
+                                    <h3 className="font-semibold text-neutral-900 mb-1">{t('contact.location_label')}</h3>
+                                    <p className="text-neutral-600">{t('contact.location_value')}</p>
+                                    <p className="text-neutral-500 text-sm mt-1">{t('contact.location_sub')}</p>
                                 </div>
                             </div>
                         </motion.div>
@@ -142,13 +142,13 @@ const Contact = () => {
                                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
                                     <CheckCircle className="w-8 h-8 text-green-600" />
                                 </div>
-                                <h3 className="text-xl font-bold text-neutral-900">¡Mensaje enviado!</h3>
-                                <p className="text-neutral-500">Nuestro equipo te responderá a la brevedad.</p>
+                                <h3 className="text-xl font-bold text-neutral-900">{t('contact.sent_title')}</h3>
+                                <p className="text-neutral-500">{t('contact.sent_desc')}</p>
                                 <button
                                     onClick={() => setSubmitted(false)}
                                     className="text-sm text-green-700 font-medium hover:underline"
                                 >
-                                    Enviar otro mensaje
+                                    {t('contact.send_another')}
                                 </button>
                             </motion.div>
                         ) : (

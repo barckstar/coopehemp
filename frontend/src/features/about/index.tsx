@@ -215,7 +215,7 @@ const About = () => {
                                         <Users size={40} />
                                     </div>
                                 </div>
-                                <h3 className="text-lg font-bold text-gray-900">Nombre Apellido</h3>
+                                <h3 className="text-lg font-bold text-gray-900">{t('about.team_name_placeholder')}</h3>
                                 <p className="text-sm text-coope-green-600 font-medium">{t('about.team_role')}</p>
                             </div>
                         ))}

@@ -34,7 +34,7 @@ class NewsletterModuleService extends MedusaService({
       )
     }
 
-    const translations = campaign.translations as CampaignTranslation[]
+    const translations = campaign.translations as unknown as CampaignTranslation[]
     if (!translations || translations.length === 0) {
       throw new Error("Campaign has no translations — add at least one locale")
     }

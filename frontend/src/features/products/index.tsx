@@ -94,7 +94,7 @@ const FALLBACK_PRODUCTS: DisplayProduct[] = [
 
 // ─── Map Medusa products → DisplayProduct ─────────────────────────────────────
 
-function fromMedusaProducts(products: MedusaProduct[], currency: string): DisplayProduct[] {
+function fromMedusaProducts(products: MedusaProduct[], currency: string, t: (key: string) => string): DisplayProduct[] {
     return products.map((p, idx) => {
         const variant = p.variants?.[0];
         const rawAmount = variant?.calculated_price?.calculated_amount ?? 0;
@@ -106,7 +106,7 @@ function fromMedusaProducts(products: MedusaProduct[], currency: string): Displa
                 minimumFractionDigits: currency.toLowerCase() === 'crc' ? 0 : 2,
                 maximumFractionDigits: currency.toLowerCase() === 'crc' ? 0 : 2,
               }).format(priceNum)
-            : 'Consultar precio';
+            : t('products.price_ask');
 
         return {
             id: idx + 1,
@@ -116,7 +116,7 @@ function fromMedusaProducts(products: MedusaProduct[], currency: string): Displa
             price: priceFmt,
             priceNumeric: priceNum,
             image: p.thumbnail ?? '/hemp-plant.jpg',
-            category: p.tags?.[0]?.value ?? 'Producto',
+            category: p.tags?.[0]?.value ?? t('products.category_fallback'),
         };
     });
 }
@@ -189,7 +189,7 @@ const Products = () => {
 
             if (raw.length > 0) {
                 const currency = raw[0]?.variants?.[0]?.calculated_price?.currency_code ?? region?.currency_code ?? 'crc';
-                setProducts(fromMedusaProducts(raw, currency));
+                setProducts(fromMedusaProducts(raw, currency, t));
                 setFromMedusa(true);
             } else {
                 // Products exist in DB but not linked to sales channel yet
@@ -205,6 +205,7 @@ const Products = () => {
         }
     };
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- carga de productos una sola vez al montar
     useEffect(() => { fetchProducts(); }, []);
 
     const container = {
@@ -256,7 +257,7 @@ const Products = () => {
                             onClick={fetchProducts}
                             className="inline-flex items-center gap-2 text-coope-green-700 font-medium hover:underline"
                         >
-                            <RefreshCw className="w-4 h-4" /> Reintentar
+                            <RefreshCw className="w-4 h-4" /> {t('products.retry')}
                         </button>
                     </div>
                 ) : (
@@ -274,6 +275,7 @@ const Products = () => {
                             >
                                 <div className="relative h-64 overflow-hidden bg-neutral-100">
                                     <img
+                                        loading="lazy"
                                         src={product.image}
                                         alt={product.name}
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -285,7 +287,7 @@ const Products = () => {
                                     {/* Medusa badge — shows when data is live */}
                                     {fromMedusa && product.variantId && (
                                         <div className="absolute top-4 left-4 bg-coope-green-600/90 backdrop-blur-sm px-2 py-0.5 rounded-full text-[10px] font-bold text-white">
-                                            En stock
+                                            {t('products.in_stock')}
                                         </div>
                                     )}
                                 </div>

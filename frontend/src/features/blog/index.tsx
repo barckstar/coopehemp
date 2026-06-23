@@ -58,6 +58,7 @@ function PostCard({ post, locale }: { post: BlogPostSummary; locale: string }) {
             >
                 <div className="relative h-48 overflow-hidden">
                     <img
+                        loading="lazy"
                         src={image}
                         alt={post.title}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
@@ -154,12 +155,13 @@ const Blog = () => {
             setPosts(res.posts);
             setCount(res.count);
         } catch {
-            setError('No se pudieron cargar los artículos. Verificá tu conexión.');
+            setError(t('blog.load_error'));
         } finally {
             setLoading(false);
         }
     }, [language, category, page]);
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- carga de datos al montar / cambiar filtros
     useEffect(() => { fetchPosts(); }, [fetchPosts]);
 
     // Reset to page 1 on filter change
@@ -180,7 +182,7 @@ const Blog = () => {
             setEmail('');
         } catch (err: unknown) {
             setSubStatus('error');
-            setSubMessage(err instanceof Error ? err.message : 'Error al suscribirse.');
+            setSubMessage(err instanceof Error ? err.message : t('blog.sub_error'));
         }
     };
 
@@ -219,7 +221,7 @@ const Blog = () => {
                                 : 'bg-white text-neutral-600 border border-neutral-200 hover:border-green-400 hover:text-green-700'
                         }`}
                     >
-                        {cat || (language === 'en' ? 'All' : 'Todos')}
+                        {cat || t('blog.all')}
                     </button>
                 ))}
             </div>
@@ -233,7 +235,7 @@ const Blog = () => {
                             onClick={fetchPosts}
                             className="inline-flex items-center gap-2 text-green-700 font-medium hover:underline"
                         >
-                            <RefreshCw className="w-4 h-4" /> Reintentar
+                            <RefreshCw className="w-4 h-4" /> {t('blog.retry')}
                         </button>
                     </div>
                 ) : loading ? (
@@ -242,7 +244,7 @@ const Blog = () => {
                     </div>
                 ) : posts.length === 0 ? (
                     <div className="text-center py-20 text-neutral-500">
-                        {language === 'en' ? 'No posts found.' : 'No hay artículos en esta categoría.'}
+                        {t('blog.empty')}
                     </div>
                 ) : (
                     <>
@@ -268,7 +270,7 @@ const Blog = () => {
                                     disabled={page === 1}
                                     className="px-4 py-2 rounded-lg border border-neutral-200 text-sm text-neutral-600 hover:border-green-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                                 >
-                                    ← {language === 'en' ? 'Prev' : 'Anterior'}
+                                    ← {t('blog.prev')}
                                 </button>
                                 <span className="text-sm text-neutral-500">
                                     {page} / {totalPages}
@@ -278,7 +280,7 @@ const Blog = () => {
                                     disabled={page === totalPages}
                                     className="px-4 py-2 rounded-lg border border-neutral-200 text-sm text-neutral-600 hover:border-green-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                                 >
-                                    {language === 'en' ? 'Next' : 'Siguiente'} →
+                                    {t('blog.next')} →
                                 </button>
                             </div>
                         )}
@@ -305,8 +307,8 @@ const Blog = () => {
                                 <div className="w-14 h-14 bg-green-500/20 rounded-full flex items-center justify-center">
                                     <CheckCircle className="w-7 h-7 text-green-400" />
                                 </div>
-                                <h3 className="text-2xl font-bold">{subMessage || '¡Suscripción exitosa!'}</h3>
-                                <p className="text-neutral-400">Pronto recibirás novedades de CoopeHemp.</p>
+                                <h3 className="text-2xl font-bold">{subMessage || t('blog.sub_success')}</h3>
+                                <p className="text-neutral-400">{t('blog.sub_desc')}</p>
                             </motion.div>
                         ) : (
                             <>

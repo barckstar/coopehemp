@@ -22,7 +22,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
 
   // Return only the requested locale translation per post
   const data = posts.map((post) => {
-    const translations = (post.translations as any[]) || []
+    const translations = (post.translations as unknown as any[]) || []
     const t =
       translations.find((tr) => tr.locale === locale) ||
       translations.find((tr) => tr.locale === "es") ||
@@ -33,7 +33,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
       id: post.id,
       slug: post.slug,
       cover_image: post.cover_image,
-      gallery: (post.gallery as string[]) || [],
+      gallery: (post.gallery as unknown as string[]) || [],
       category: post.category,
       author_name: post.author_name,
       published_at: post.published_at,

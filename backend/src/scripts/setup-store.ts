@@ -78,6 +78,7 @@ export default async function setupStore({ container }: { container: MedusaConta
       amount: 350000,  // ₡3,500 (Medusa stores prices in minor units × 100)
       currency: "crc",
       regionId: regionCRC.id,
+      countries: ["cr"],
     },
     {
       fsName: "CoopeHemp — Envío Express",
@@ -88,6 +89,7 @@ export default async function setupStore({ container }: { container: MedusaConta
       amount: 700000,  // ₡7,000
       currency: "crc",
       regionId: regionCRC.id,
+      countries: ["cr"],
     },
     {
       fsName: "CoopeHemp — International",
@@ -98,6 +100,7 @@ export default async function setupStore({ container }: { container: MedusaConta
       amount: 2500,    // $25.00
       currency: "usd",
       regionId: regionUSD.id,
+      countries: ["us", "ca", "de", "nl", "es", "mx", "co"],
     },
   ]
 
@@ -126,7 +129,7 @@ export default async function setupStore({ container }: { container: MedusaConta
         zone = await fulfillmentModule.createServiceZones({
           name: cfg.zoneName,
           fulfillment_set_id: fSet.id,
-          geo_zones: [{ type: "country", country_code: "cr" }],
+          geo_zones: cfg.countries.map((c) => ({ type: "country" as const, country_code: c })),
         })
       }
 

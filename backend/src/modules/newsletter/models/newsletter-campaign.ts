@@ -14,7 +14,7 @@ const NewsletterCampaign = model.define("newsletter_campaign", {
   sent_at: model.dateTime().nullable(),
   recipient_count: model.number().default(0),
   // [{locale, subject, body_html}] — one entry per language
-  translations: model.json<CampaignTranslation[]>().default([]),
+  translations: model.json().default([] as any),
 })
 
 export default NewsletterCampaign

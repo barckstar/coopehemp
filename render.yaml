@@ -1,0 +1,48 @@
+# Render Blueprint — backend Medusa de CoopeHemp
+# Deploy: Render Dashboard → New → Blueprint → conectar este repo.
+# Frontend va aparte en Vercel/Netlify (NO acá).
+#
+# Notas free tier:
+# - Sin Redis: Medusa usa event-bus/cache/locking en memoria (ok para demo).
+# - Migraciones: van en el startCommand (idempotentes) porque el plan free no da shell.
+# - Web service se duerme tras 15 min; Postgres free expira a los 90 días.
+# - El build del admin puede quedarse sin RAM (512MB) en free — si falla, ver plan B.
+
+services:
+  - type: web
+    name: coopehemp-backend
+    runtime: node
+    rootDir: backend
+    plan: free
+    region: oregon
+    healthCheckPath: /health
+    buildCommand: npm ci && npm run build && cd .medusa/server && npm ci --omit=dev
+    startCommand: cd .medusa/server && npx medusa db:migrate && npm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: coopehemp-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: COOKIE_SECRET
+        generateValue: true
+      - key: DISABLE_MEDUSA_ADMIN
+        value: "false"
+      # Estos 4 los completás en el dashboard con la URL real del front y del back:
+      - key: MEDUSA_BACKEND_URL
+        sync: false   # https://coopehemp-backend.onrender.com
+      - key: STORE_CORS
+        sync: false   # https://tu-front.vercel.app
+      - key: ADMIN_CORS
+        sync: false   # https://coopehemp-backend.onrender.com
+      - key: AUTH_CORS
+        sync: false   # https://tu-front.vercel.app,https://coopehemp-backend.onrender.com
+
+databases:
+  - name: coopehemp-db
+    plan: free
+    databaseName: coopehemp
+    user: medusa

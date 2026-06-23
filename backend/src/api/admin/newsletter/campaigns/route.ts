@@ -46,7 +46,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   }
 
   const campaign = await newsletterService.createNewsletterCampaigns({
-    translations,
+    translations: translations as any,
     status: "draft",
     recipient_count: 0,
   })

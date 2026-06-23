@@ -33,7 +33,7 @@ export async function PUT(req: MedusaRequest, res: MedusaResponse) {
     return res.status(400).json({ message: "translations es requerido" })
   }
 
-  const [updated] = await newsletterService.updateNewsletterCampaigns(
+  const updated = await newsletterService.updateNewsletterCampaigns(
     { id: req.params.id },
     { translations }
   )

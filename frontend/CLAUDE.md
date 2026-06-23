@@ -108,11 +108,22 @@ Español como idioma de URL principal, con alias legacy en inglés:
 
 ## Estado conocido / pendientes
 
-- Pasarela de pago real sin configurar (placeholders en `.env.example`).
-- Datos mock sin traducir/sin venir del backend en `products`, `directory` y `map` (arrays hardcodeados
-  en el propio componente). `blog` sí consume el backend real vía `listBlogPosts()`.
-- `npm run lint` y `npm run build` deben pasar limpios antes de dar por buena cualquier sesión de
-  trabajo — `tsc -b` ya detectó al menos un error real de `verbatimModuleSyntax` en el pasado.
+**Hecho (listo para entrega):** i18n es/en completo (TODO el texto de UI en los JSON; `tRaw()` para
+arrays/objetos — ver `LanguageContext`), Parallax Vivo en el home (skill `parallax-vivo`), navbar
+auto-hide + sólido/transparente según la página, 404 + `ErrorBoundary`, accesibilidad (aria-labels,
+imágenes `loading="lazy"`), SEO/IA (`llms.txt` + `sitemap.xml` + `robots.txt` + 4× JSON-LD),
+code-splitting por ruta/vendors + preload del hero (LCP). **QA responsive OK en todas las secciones**;
+`build` y `lint` pasan (0 errores; 4 warnings advisory de `exhaustive-deps`).
+
+**Pendiente:**
+- **Formulario de contacto**: hoy NO envía (no-op) — a la espera de definir endpoint/servicio con el cliente.
+- `products` consume el backend real (con fallback mock si está caído); `directory` y `map` siguen
+  siendo datos mock (son datos, no texto de UI → no van a i18n). `blog` consume el backend real.
+- **Pasarela de pago real** sin configurar (checkout opera con el proveedor manual `pp_system_default`).
+- **SSG/prerender**: la app es SPA. `vite-react-ssg` NO sirve (incompatible con React Router 7); la
+  vía válida es prerender con navegador headless (puppeteer). Queda como tarea enfocada.
+- Regla vigente: **todo texto de UI va en los JSON de i18n**. `npm run lint` y `npm run build` deben
+  pasar limpios (`tsc -b` con `verbatimModuleSyntax` → tipos puros con `import type`).
 
 ## Variables de entorno (`.env.local`, ver `.env.example`)
 

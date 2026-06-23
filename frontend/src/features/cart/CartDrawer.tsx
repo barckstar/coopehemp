@@ -54,6 +54,7 @@ export const CartDrawer = () => {
               </div>
               <button
                 onClick={closeCart}
+                aria-label={t('a11y.close')}
                 className="p-2 rounded-xl text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors"
               >
                 <X size={20} />
@@ -123,6 +124,7 @@ export const CartDrawer = () => {
                           <div className="flex items-center gap-1 bg-white rounded-xl border border-gray-200 px-1 py-0.5">
                             <button
                               onClick={() => updateQty(item.id, item.quantity - 1)}
+                              aria-label={t('a11y.decrease')}
                               className="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-coope-green-600 transition-colors rounded-lg hover:bg-coope-green-50"
                             >
                               <Minus size={12} />
@@ -132,6 +134,7 @@ export const CartDrawer = () => {
                             </span>
                             <button
                               onClick={() => updateQty(item.id, item.quantity + 1)}
+                              aria-label={t('a11y.increase')}
                               className="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-coope-green-600 transition-colors rounded-lg hover:bg-coope-green-50"
                             >
                               <Plus size={12} />

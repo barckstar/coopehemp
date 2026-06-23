@@ -76,6 +76,8 @@ interface PaymentRenderProps {
   setLoading: (v: boolean) => void;
   onSuccess: () => void;
   onError: (msg: string) => void;
+  t: (key: string) => string;
+  lang: string;
 }
 
 interface PaymentProviderUI {
@@ -103,24 +105,23 @@ const SystemDefaultProvider: PaymentProviderUI = {
   id: 'pp_system_default',
   label: 'Confirmar pedido',
   description: 'Tu pedido será procesado manualmente.',
-  render: ({ total, currency, loading, onSuccess }) => (
+  render: ({ total, currency, loading, onSuccess, t, lang }) => (
     <div className="space-y-5">
       <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 flex gap-3">
         <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
         <div>
-          <p className="font-semibold text-amber-900 text-sm">Sin cobro inmediato</p>
+          <p className="font-semibold text-amber-900 text-sm">{t('checkout.no_charge_title')}</p>
           <p className="text-amber-700 text-sm mt-1 leading-relaxed">
-            Al confirmar, registraremos tu pedido. Un asesor de CoopeHemp te
-            contactará en 24–48 h para coordinar el pago y la entrega.
+            {t('checkout.no_charge_desc')}
           </p>
         </div>
       </div>
 
       {total > 0 && (
         <div className="flex items-center justify-between bg-gray-50 rounded-2xl px-5 py-4">
-          <span className="font-medium text-gray-700 text-sm">Total estimado</span>
+          <span className="font-medium text-gray-700 text-sm">{t('checkout.total')}</span>
           <span className="text-xl font-bold text-gray-900">
-            {fmtAmount(total, currency, 'es')}
+            {fmtAmount(total, currency, lang)}
           </span>
         </div>
       )}
@@ -152,7 +153,7 @@ const SystemDefaultProvider: PaymentProviderUI = {
         {loading
           ? <Loader2 className="w-5 h-5 animate-spin" />
           : <CheckCircle2 className="w-5 h-5" />}
-        Confirmar pedido
+        {t('checkout.confirm_order')}
       </button>
     </div>
   ),
@@ -398,7 +399,7 @@ export default function Checkout() {
         </div>
         <div>
           <p className="text-xl font-bold text-gray-700">{t('checkout.empty_title')}</p>
-          <p className="text-gray-400 mt-2 text-sm">Agregá productos para continuar.</p>
+          <p className="text-gray-400 mt-2 text-sm">{t('checkout.empty_desc')}</p>
         </div>
         <Link
           to="/productos"
@@ -473,23 +474,23 @@ export default function Checkout() {
         <Field label={t('checkout.first_name')} required>
           <input required className={inputCls} value={contact.first_name}
             onChange={(e) => setContact((c) => ({ ...c, first_name: e.target.value }))}
-            placeholder="Juan" />
+            placeholder={t('checkout.ph_first')} />
         </Field>
         <Field label={t('checkout.last_name')} required>
           <input required className={inputCls} value={contact.last_name}
             onChange={(e) => setContact((c) => ({ ...c, last_name: e.target.value }))}
-            placeholder="Pérez" />
+            placeholder={t('checkout.ph_last')} />
         </Field>
       </div>
       <Field label={t('checkout.email')} required>
         <input required type="email" className={inputCls} value={contact.email}
           onChange={(e) => setContact((c) => ({ ...c, email: e.target.value }))}
-          placeholder="juan@ejemplo.cr" />
+          placeholder={t('checkout.ph_email')} />
       </Field>
       <Field label={t('checkout.phone')}>
         <input type="tel" className={inputCls} value={contact.phone}
           onChange={(e) => setContact((c) => ({ ...c, phone: e.target.value }))}
-          placeholder="+506 8888-8888" />
+          placeholder={t('checkout.ph_phone')} />
       </Field>
       <div className="flex gap-3 pt-2">
         <button type="button" onClick={goBack}
@@ -511,30 +512,30 @@ export default function Checkout() {
       <Field label={t('checkout.address_1')} required>
         <input required className={inputCls} value={address.address_1}
           onChange={(e) => setAddress((a) => ({ ...a, address_1: e.target.value }))}
-          placeholder="Calle 10, Barrio Los Yoses" />
+          placeholder={t('checkout.ph_address')} />
       </Field>
       <Field label={t('checkout.address_2')}>
         <input className={inputCls} value={address.address_2}
           onChange={(e) => setAddress((a) => ({ ...a, address_2: e.target.value }))}
-          placeholder="Apto 2B" />
+          placeholder={t('checkout.ph_address2')} />
       </Field>
       <div className="grid grid-cols-2 gap-4">
         <Field label={t('checkout.city')} required>
           <input required className={inputCls} value={address.city}
             onChange={(e) => setAddress((a) => ({ ...a, city: e.target.value }))}
-            placeholder="San José" />
+            placeholder={t('checkout.ph_city')} />
         </Field>
         <Field label={t('checkout.province')}>
           <input className={inputCls} value={address.province}
             onChange={(e) => setAddress((a) => ({ ...a, province: e.target.value }))}
-            placeholder="San José" />
+            placeholder={t('checkout.ph_province')} />
         </Field>
       </div>
       <div className="grid grid-cols-2 gap-4">
         <Field label={t('checkout.postal_code')}>
           <input className={inputCls} value={address.postal_code}
             onChange={(e) => setAddress((a) => ({ ...a, postal_code: e.target.value }))}
-            placeholder="10101" />
+            placeholder={t('checkout.ph_postal')} />
         </Field>
         <Field label={t('checkout.country')} required>
           <select required className={inputCls + ' bg-white'} value={address.country_code}
@@ -619,7 +620,7 @@ export default function Checkout() {
           )}
           <div className="flex justify-between font-bold text-gray-900 pt-2 border-t border-gray-200">
             <span>{t('checkout.total')}</span>
-            <span>${subtotal.toFixed(2)}{selectedOption ? ' + envío' : ''}</span>
+            <span>${subtotal.toFixed(2)}{selectedOption ? ' ' + t('checkout.plus_shipping') : ''}</span>
           </div>
         </div>
 
@@ -637,6 +638,8 @@ export default function Checkout() {
           setLoading: setPayLoading,
           onSuccess: handlePayment,
           onError: setError,
+          t,
+          lang,
         })}
 
         <button type="button" onClick={goBack}
@@ -681,7 +684,7 @@ export default function Checkout() {
         </Link>
         <Link to="/contacto"
           className="inline-flex items-center justify-center gap-2 border border-gray-200 text-gray-600 px-6 py-3 rounded-xl font-medium hover:bg-gray-50 transition-colors text-sm">
-          Contáctanos
+          {t('checkout.contact_btn')}
         </Link>
       </div>
     </motion.div>

@@ -1,35 +1,12 @@
-import { useState, useMemo } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-import { Search, MapPin, Clock, Package, Filter } from 'lucide-react';
+import { useState, useMemo, lazy, Suspense } from 'react';
+import { Search, MapPin, Filter } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useTranslation } from '../../i18n/LanguageContext';
 import useScrollToTop from '../../shared/hooks/useScrollToTop';
 import { useSEO } from '../../shared/hooks/useSEO';
 
-// Fix Leaflet default icon issue with Vite
-delete (L.Icon.Default.prototype as unknown as Record<string, unknown>)._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-});
-
-const createIcon = (active: boolean) =>
-  L.divIcon({
-    html: `<div style="
-      width:32px;height:32px;border-radius:50% 50% 50% 0;
-      background:${active ? '#2f884a' : '#9ca3af'};
-      border:2px solid white;
-      transform:rotate(-45deg);
-      box-shadow:0 2px 8px rgba(0,0,0,0.3);
-    "></div>`,
-    className: '',
-    iconSize: [32, 32],
-    iconAnchor: [16, 32],
-    popupAnchor: [0, -34],
-  });
+// El mapa Leaflet vive en un componente client-only (Leaflet no es SSR-safe).
+const LeafletMap = lazy(() => import('./LeafletMap'));
 
 interface VendingLocation {
   id: number;
@@ -145,14 +122,7 @@ const locations: VendingLocation[] = [
   },
 ];
 
-const provinces = ['Todas las provincias', ...Array.from(new Set(locations.map((l) => l.province)))];
-
-// Component that flies to a selected location
-const MapFly = ({ center }: { center: [number, number] | null }) => {
-  const map = useMap();
-  if (center) map.flyTo(center, 14, { duration: 1.2 });
-  return null;
-};
+const provinces = Array.from(new Set(locations.map((l) => l.province)));
 
 const MAP_LD = {
   '@context': 'https://schema.org',
@@ -184,7 +154,7 @@ const VendingMap = () => {
   });
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState<'all' | 'active' | 'soon'>('all');
-  const [province, setProvince] = useState('Todas las provincias');
+  const [province, setProvince] = useState('');
   const [selected, setSelected] = useState<VendingLocation | null>(null);
   const [flyTarget, setFlyTarget] = useState<[number, number] | null>(null);
 
@@ -195,7 +165,7 @@ const VendingMap = () => {
         l.province.toLowerCase().includes(search.toLowerCase()) ||
         l.address.toLowerCase().includes(search.toLowerCase());
       const matchFilter = filter === 'all' || l.status === filter;
-      const matchProvince = province === 'Todas las provincias' || l.province === province;
+      const matchProvince = province === '' || l.province === province;
       return matchSearch && matchFilter && matchProvince;
     });
   }, [search, filter, province]);
@@ -232,7 +202,7 @@ const VendingMap = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-white border-b border-gray-100 sticky top-[60px] z-30 shadow-sm">
+      <div className="bg-white border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
           <div className="relative flex-1 max-w-sm">
             <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -268,8 +238,9 @@ const VendingMap = () => {
             onChange={(e) => setProvince(e.target.value)}
             className="py-2 px-3 rounded-lg border border-gray-200 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-coope-green-400 bg-white"
           >
+            <option value="">{t('map.all_provinces')}</option>
             {provinces.map((p) => (
-              <option key={p}>{p}</option>
+              <option key={p} value={p}>{p}</option>
             ))}
           </select>
         </div>
@@ -327,44 +298,13 @@ const VendingMap = () => {
 
           {/* Map */}
           <div className="flex-1 rounded-2xl overflow-hidden border border-gray-200 shadow-sm min-h-[400px]">
-            <MapContainer
-              center={[9.9281, -84.0907]}
-              zoom={8}
-              style={{ height: '100%', width: '100%' }}
-            >
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            <Suspense fallback={<div className="w-full h-full bg-gray-100 animate-pulse" />}>
+              <LeafletMap
+                locations={filtered}
+                flyTarget={flyTarget}
+                onSelect={(loc) => setSelected(loc as VendingLocation)}
               />
-              <MapFly center={flyTarget} />
-
-              {filtered.map((loc) => (
-                <Marker
-                  key={loc.id}
-                  position={[loc.lat, loc.lng]}
-                  icon={createIcon(loc.status === 'active')}
-                  eventHandlers={{ click: () => setSelected(loc) }}
-                >
-                  <Popup>
-                    <div className="min-w-[200px] py-1">
-                      <p className="font-bold text-gray-900 text-sm mb-1">{loc.name}</p>
-                      <div className="flex items-center gap-1.5 text-xs text-gray-600 mb-1">
-                        <MapPin size={11} />
-                        {loc.address}
-                      </div>
-                      <div className="flex items-center gap-1.5 text-xs text-gray-600 mb-1">
-                        <Clock size={11} />
-                        {loc.hours}
-                      </div>
-                      <div className="flex items-start gap-1.5 text-xs text-gray-600">
-                        <Package size={11} className="mt-0.5 shrink-0" />
-                        <span>{loc.products.join(', ')}</span>
-                      </div>
-                    </div>
-                  </Popup>
-                </Marker>
-              ))}
-            </MapContainer>
+            </Suspense>
           </div>
         </div>
 

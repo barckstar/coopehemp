@@ -122,6 +122,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components -- hook co-ubicado con el provider a propósito
 export const useCart = (): CartContextType => {
   const ctx = useContext(CartContext);
   if (!ctx) throw new Error('useCart must be used inside <CartProvider>');

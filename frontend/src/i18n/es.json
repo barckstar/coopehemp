@@ -65,7 +65,22 @@
     "no_shipping": "No hay opciones de envío para esta dirección.",
     "order_summary": "Resumen del pedido",
     "shipping": "Envío",
-    "total": "Total estimado"
+    "total": "Total estimado",
+    "no_charge_title": "Sin cobro inmediato",
+    "no_charge_desc": "Al confirmar, registraremos tu pedido. Un asesor de CoopeHemp te contactará en 24–48 h para coordinar el pago y la entrega.",
+    "confirm_order": "Confirmar pedido",
+    "empty_desc": "Agregá productos para continuar.",
+    "plus_shipping": "+ envío",
+    "contact_btn": "Contáctanos",
+    "ph_first": "Juan",
+    "ph_last": "Pérez",
+    "ph_email": "juan@ejemplo.cr",
+    "ph_phone": "+506 8888-8888",
+    "ph_address": "Calle 10, Barrio Los Yoses",
+    "ph_address2": "Apto 2B",
+    "ph_city": "San José",
+    "ph_province": "San José",
+    "ph_postal": "10101"
   },
   "footer": {
     "tagline": "Pioneros en la producción sostenible de cáñamo en Costa Rica. Conectamos productores, industria y comunidad para construir un futuro más verde.",
@@ -75,7 +90,8 @@
     "newsletter_desc": "Suscríbete para recibir las últimas novedades de la cooperativa.",
     "newsletter_placeholder": "Tu correo electrónico",
     "newsletter_btn": "Suscribirse",
-    "rights": "Todos los derechos reservados."
+    "rights": "Todos los derechos reservados.",
+    "location": "San José, Costa Rica"
   },
   "home": {
     "hero_title1": "Impulsando el futuro",
@@ -104,7 +120,135 @@
     "cta_btn": "Contáctanos ahora",
     "blog_label": "Del Blog",
     "blog_title": "Lo Último en Cáñamo",
-    "blog_all": "Ver todos los artículos"
+    "blog_all": "Ver todos los artículos",
+    "anatomy": "Anatomía del Cáñamo",
+    "phase": "Fase",
+    "scroll": "scroll",
+    "keep_scrolling": "Seguí bajando para recorrer las {{n}} fases",
+    "hero_tag": "Costa Rica · CoopeHemp R.L.",
+    "hero_cta_products": "Ver Productos",
+    "showcase_label": "Tienda CoopeHemp",
+    "showcase_title": "Productos que transforman tu bienestar",
+    "showcase_sub": "Formulados con cáñamo 100% orgánico cultivado por nuestros asociados en Costa Rica.",
+    "showcase_all": "Ver catálogo completo",
+    "price_ask": "Consultar precio",
+    "category_fallback": "Producto",
+    "buy": "Comprar",
+    "added": "¡Agregado!",
+    "project_label": "Proyecto · Asociados CoopeHemp",
+    "medical_label": "Cáñamo Medicinal",
+    "medical_title1": "El poder terapéutico",
+    "medical_title2": "del CBD",
+    "medical_p1": "El sistema endocannabinoide — presente en cada ser humano — regula el dolor, el estado de ánimo, el sueño y la respuesta inmune. El CBD activa sus receptores sin producir dependencia ni efectos psicoactivos.",
+    "medical_p2": "Nuestros aceites de espectro completo preservan todos los cannabinoides, terpenos y flavonoides de la flor, potenciando el \"efecto entourage\" para resultados superiores.",
+    "medical_badge1": "+20,000 estudios científicos",
+    "medical_badge2": "respaldan los beneficios del CBD",
+    "medical_cta": "Ver aceites terapéuticos",
+    "medical_items": {
+      "antiinflamatorio": { "title": "Antiinflamatorio", "desc": "El CBD inhibe las vías inflamatorias sin efectos secundarios gastrointestinales." },
+      "ansiolitico": { "title": "Ansiolítico natural", "desc": "Reduce el cortisol y potencia los receptores GABA del sistema nervioso." },
+      "neuroprotector": { "title": "Neuroprotector", "desc": "El CBG muestra efectos prometedores en neuroprotección y regeneración celular." },
+      "sin-psicoactividad": { "title": "Sin psicoactividad", "desc": "THC inferior al 0.3%. Todos los beneficios, sin efectos psicoactivos." }
+    },
+    "cosmetic_label": "Cosmética Natural",
+    "cosmetic_title1": "Tu piel merece",
+    "cosmetic_title2": "lo mejor de la naturaleza",
+    "cosmetic_p1": "El aceite de semilla de cáñamo tiene un perfil lipídico que imita los lípidos naturales del manto dérmico, lo que lo hace excepcionalmente compatible con la piel humana — hidrata sin obstruir ni alterar el microbioma cutáneo.",
+    "cosmetic_p2": "Nuestra línea cosmética está libre de parabenos, sulfatos y silicones. Solo activos naturales que respetan tu piel y el planeta.",
+    "cosmetic_cta": "Explorar línea cosmética",
+    "cosmetic_benefits": [
+      "Imita los lípidos naturales de la piel (sebo)",
+      "Regula la producción de grasa — ideal para piel mixta",
+      "Rico en vitamina E: antioxidante potente",
+      "No comedogénico: no obstruye los poros",
+      "Apto para piel sensible, eczema y psoriasis"
+    ],
+    "hempcrete_title1": "Hempcrete:",
+    "hempcrete_title2": "Construir con la naturaleza",
+    "hempcrete_p1": "La agramiza (médula del tallo de cáñamo) mezclada con cal hidráulica produce Hempcrete: un material de construcción biocompuesto que es más liviano que el concreto, secuestra carbono de forma permanente y mejora con el tiempo.",
+    "hempcrete_p2": "Mientras el concreto convencional emite CO₂, el Hempcrete lo captura. Es el único material de construcción con huella de carbono negativa, volviéndose más resistente cada año gracias a la mineralización natural de la cal.",
+    "hempcrete_cta": "Conocer el proyecto",
+    "hempcrete_stats": [
+      { "value": "−1.6 t", "label": "CO₂ capturado por m³ al año" },
+      { "value": "3×", "label": "Más liviano que el concreto" },
+      { "value": "100%", "label": "Biodegradable y reciclable" },
+      { "value": "0", "label": "Toxinas ni VOCs emitidos" }
+    ],
+    "hempcrete_cards": [
+      { "icon": "🌿", "title": "Agramiza de cáñamo", "desc": "La médula leñosa del tallo triturada — el 70% de la biomasa de la planta — se mezcla con cal para crear el compuesto." },
+      { "icon": "🏗️", "title": "Carbonatación natural", "desc": "Con el tiempo la cal reacciona con el CO₂ del aire y con el sílice de la agramiza, volviéndose pietra — piedra — cada vez más dura." },
+      { "icon": "♻️", "title": "Ciclo de vida completo", "desc": "Al final de su vida útil, el Hempcrete puede compostarse, volviéndose abono para nuevos cultivos de cáñamo." }
+    ],
+    "mission_caption": "Más de 50 familias productoras",
+    "cta_store": "Tienda",
+    "stages": {
+      "semilla": {
+        "title": "La Semilla",
+        "subtitle": "El superfood más completo del planeta",
+        "description": "Todo comienza aquí. La semilla de cáñamo concentra proteína completa con los 9 aminoácidos esenciales y omegas 3, 6 y 9 en la proporción ideal para el metabolismo humano, la misma que la leche materna.",
+        "facts": [
+          ">30% proteína de alta biodisponibilidad",
+          "Omega 3:6:9 en ratio óptimo 1:3:1",
+          "Fuente de zinc, magnesio y hierro",
+          "Sin gluten · apta para veganos"
+        ]
+      },
+      "raiz": {
+        "title": "Raíz y Suelo",
+        "subtitle": "Guardiana del ecosistema",
+        "description": "Las raíces penetran a 2+ metros, rompiendo suelos compactados y absorbiendo metales pesados en procesos de fitorremediación activa. El cáñamo no necesita pesticidas: su química natural repele plagas.",
+        "facts": [
+          "Fitorremediación: absorbe metales pesados",
+          "Sin pesticidas ni herbicidas",
+          "Mejora la biodiversidad del suelo",
+          "Captura CO₂ incluso en reposo"
+        ]
+      },
+      "fibra-bast": {
+        "title": "Fibra Bast",
+        "subtitle": "La fibra más resistente de la naturaleza",
+        "description": "La corteza del tallo produce fibras largas y resistentes llamadas bast o cáñamon. Son la base de textiles técnicos, cuerdas industriales, papel de alta calidad y compuestos de bioingeniería para la industria automotriz.",
+        "facts": [
+          "3× más resistente que el algodón",
+          "Textiles antibacterianos naturales",
+          "Papel sin talar un árbol",
+          "Bioplásticos y compuestos de ingeniería"
+        ]
+      },
+      "agramiza": {
+        "title": "Agramiza / Hurd",
+        "subtitle": "La materia prima del Hempcrete",
+        "description": "La médula leñosa interior del tallo se mezcla con cal hidráulica para producir Hempcrete: un material de construcción que se vuelve más resistente con el tiempo, es ignífugo, antibacterial y captura carbono de forma permanente.",
+        "facts": [
+          "Captura 1.6 t de CO₂ por m³/año",
+          "Aislamiento térmico y acústico superior",
+          "Ignífugo y resistente a plagas",
+          "Proyecto estrella de los asociados"
+        ]
+      },
+      "flor": {
+        "title": "La Flor",
+        "subtitle": "La farmacia más compleja de la naturaleza",
+        "description": "Los tricomas de la flor sintetizan más de 100 cannabinoides distintos. CBD, CBG, CBN y terpenos trabajan en sinergia — el \"efecto entourage\" — potenciando exponencialmente cada beneficio terapéutico.",
+        "facts": [
+          "CBD: antiinflamatorio y ansiolítico",
+          "CBG: neuroprotector emergente",
+          "Terpenos: aromaterapia terapéutica",
+          "THC <0.3% — sin psicoactividad"
+        ]
+      },
+      "extraccion": {
+        "title": "Extracción & Productos",
+        "subtitle": "De la planta al consumidor final",
+        "description": "Mediante extracción por CO₂ supercrítico, prensado en frío y procesos artesanales certificados, transformamos cada parte de la planta en productos de la más alta calidad para salud, cosmética y construcción.",
+        "facts": [
+          "Aceites CBD espectro completo",
+          "Cremas y cosméticos naturales",
+          "Hempcrete para construcción sostenible",
+          "Superfoods y suplementos deportivos"
+        ]
+      }
+    }
   },
   "about": {
     "hero_label": "Sobre Nosotros",
@@ -140,7 +284,8 @@
     "cta_title": "Sé parte de la revolución verde",
     "cta_sub": "Ya seas productor, inversionista o consumidor, hay un lugar para ti en CoopeHemp.",
     "cta_contact": "Contáctanos",
-    "cta_products": "Ver Productos"
+    "cta_products": "Ver Productos",
+    "team_name_placeholder": "Nombre Apellido"
   },
   "products": {
     "hero_badge": "100% Orgánico & Sostenible",
@@ -149,7 +294,11 @@
     "wholesale_title": "¿Mayorista?",
     "wholesale_desc": "Únete a nuestra red de distribuidores y lleva los mejores productos de cáñamo a tus clientes.",
     "wholesale_btn": "Contáctanos",
-    "details_btn": "Detalles"
+    "details_btn": "Detalles",
+    "in_stock": "En stock",
+    "retry": "Reintentar",
+    "price_ask": "Consultar precio",
+    "category_fallback": "Producto"
   },
   "blog": {
     "title": "Blog & Noticias",
@@ -158,7 +307,26 @@
     "newsletter_title": "Suscríbete a nuestro Boletín",
     "newsletter_desc": "Recibe directamente en tu correo las últimas noticias sobre la cooperativa y artículos educativos.",
     "newsletter_placeholder": "Tu correo electrónico",
-    "newsletter_btn": "Suscribirse"
+    "newsletter_btn": "Suscribirse",
+    "load_error": "No se pudieron cargar los artículos. Verificá tu conexión.",
+    "sub_error": "Error al suscribirse.",
+    "all": "Todos",
+    "retry": "Reintentar",
+    "empty": "No hay artículos en esta categoría.",
+    "prev": "Anterior",
+    "next": "Siguiente",
+    "sub_success": "¡Suscripción exitosa!",
+    "sub_desc": "Pronto recibirás novedades de CoopeHemp.",
+    "back_short": "Blog",
+    "not_found": "Artículo no encontrado.",
+    "unavailable": "Artículo no disponible",
+    "back_to_blog": "Volver al blog",
+    "copied": "Link copiado",
+    "share": "Compartir",
+    "post_cta_title": "¿Te interesa el cáñamo sostenible?",
+    "post_cta_desc": "Somos una cooperativa costarricense de productores. Contáctanos para conocer más.",
+    "more_articles": "Más artículos",
+    "post_cta_contact": "Contáctanos"
   },
   "contact": {
     "hero_title": "Hablemos",
@@ -179,7 +347,18 @@
     "community_label": "Comunidad",
     "community_title": "Cultivando Juntos",
     "community_desc": "El cáñamo no es solo un cultivo, es una oportunidad para fortalecer nuestras comunidades y regenerar nuestra tierra.",
-    "community_link": "Conoce nuestra historia"
+    "community_link": "Conoce nuestra historia",
+    "email_label": "Email",
+    "phone_label": "Teléfono",
+    "location_label": "Ubicación",
+    "location_value": "Costa Rica",
+    "location_sub": "Oficinas Centrales",
+    "sent_title": "¡Mensaje enviado!",
+    "sent_desc": "Nuestro equipo te responderá a la brevedad.",
+    "send_another": "Enviar otro mensaje",
+    "market_estimated": "Estimado",
+    "market_projection": "Proyección",
+    "market_future": "Futuro"
   },
   "map": {
     "title": "Mapa de Expendedoras",
@@ -192,6 +371,7 @@
     "status_active": "Activa",
     "status_soon": "Próximamente",
     "no_results": "No se encontraron ubicaciones con ese criterio.",
+    "all_provinces": "Todas las provincias",
     "click_hint": "Haz clic en un marcador para ver detalles",
     "popup_address": "Dirección",
     "popup_hours": "Horario",
@@ -237,5 +417,21 @@
     "cta_title": "¿Necesitas más información?",
     "cta_sub": "Si requieres documentos adicionales o tienes consultas sobre nuestra operación, no dudes en contactarnos.",
     "cta_btn": "Contactar al Equipo"
+  },
+  "notfound": {
+    "title": "Página no encontrada",
+    "message": "La página que buscás no existe o fue movida.",
+    "back": "Volver al inicio"
+  },
+  "error": {
+    "title": "Algo salió mal",
+    "message": "Ocurrió un error inesperado. Probá recargar la página.",
+    "reload": "Recargar"
+  },
+  "a11y": {
+    "menu": "Abrir menú",
+    "close": "Cerrar",
+    "increase": "Aumentar cantidad",
+    "decrease": "Disminuir cantidad"
   }
 }

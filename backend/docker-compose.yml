@@ -44,7 +44,12 @@ services:
       MP_SMTP_AUTH_ALLOW_INSECURE: 1
 
   # ─── Medusa Backend ─────────────────────────────────────────────────────────
+  # OJO: el ADMIN (Vite/HMR) NO funciona servido desde Docker (pantalla en blanco).
+  # Para desarrollo/demo correr Medusa en el HOST (`npm run dev`) y dejar en Docker
+  # solo la infra. Por eso este servicio está bajo un profile y NO arranca por defecto.
+  # Para levantarlo igual (p. ej. probar la API en contenedor): docker compose --profile with-medusa up -d
   medusa:
+    profiles: ["with-medusa"]
     build:
       context: .
       dockerfile: Dockerfile
@@ -59,7 +64,7 @@ services:
     env_file:
       - .env
     environment:
-      NODE_ENV: production
+      NODE_ENV: development
       # En producción Docker la DB apunta al servicio interno, no a localhost
       DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       REDIS_URL: redis://redis:6379

@@ -7,7 +7,27 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [react()],
+    build: {
+      target: 'es2020',
+      // Separar vendors pesados en chunks propios → mejor cacheo y carga inicial más liviana.
+      rollupOptions: {
+        output: {
+          manualChunks(id: string) {
+            if (id.includes('node_modules')) {
+              if (id.includes('framer-motion')) return 'framer';
+              if (id.includes('react-router') || id.includes('@remix-run')) return 'router';
+              if (id.includes('/react/') || id.includes('/react-dom/') || id.includes('/scheduler/')) return 'react';
+              // El resto (leaflet, react-markdown, etc.) lo deja Vite por ruta:
+              // así Leaflet queda en el chunk lazy de /mapa y markdown en el de Post,
+              // sin cargar eager en el home.
+            }
+          },
+        },
+      },
+    },
     server: {
+      // Permitir el host del túnel (cloudflared) para demos públicas
+      allowedHosts: ['.trycloudflare.com'],
       proxy: {
         // Proxy /store/* and /admin/* to Medusa (avoids CORS in dev)
         '/store': { target: medusaUrl, changeOrigin: true },

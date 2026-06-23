@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1600" viewBox="0 0 1200 1600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#06281a"/>
+      <stop offset="1" stop-color="#0c4429"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1600" fill="url(#bg)"/>
+  <ellipse cx="600" cy="1420" rx="540" ry="80" fill="#3a2a16"/>
+  <ellipse cx="600" cy="1410" rx="540" ry="64" fill="#4a3620"/>
+  
+  <path d="M600 1410 L600 582" stroke="#2fae5e" stroke-width="23" stroke-linecap="round"/>
+  <ellipse cx="540" cy="1306.5042372881355" rx="121" ry="42" fill="#2aa257" transform="rotate(-28 540 1306.5042372881355)"/><ellipse cx="660" cy="1306.5042372881355" rx="121" ry="42" fill="#34b765" transform="rotate(28 660 1306.5042372881355)"/><ellipse cx="540" cy="1203.0084745762713" rx="113" ry="39" fill="#2aa257" transform="rotate(-28 540 1203.0084745762713)"/><ellipse cx="660" cy="1203.0084745762713" rx="113" ry="39" fill="#34b765" transform="rotate(28 660 1203.0084745762713)"/><ellipse cx="540" cy="1099.5127118644068" rx="105" ry="36" fill="#2aa257" transform="rotate(-28 540 1099.5127118644068)"/><ellipse cx="660" cy="1099.5127118644068" rx="105" ry="36" fill="#34b765" transform="rotate(28 660 1099.5127118644068)"/><ellipse cx="540" cy="996.0169491525423" rx="96" ry="33" fill="#2aa257" transform="rotate(-28 540 996.0169491525423)"/><ellipse cx="660" cy="996.0169491525423" rx="96" ry="33" fill="#34b765" transform="rotate(28 660 996.0169491525423)"/><ellipse cx="540" cy="892.521186440678" rx="88" ry="30" fill="#2aa257" transform="rotate(-28 540 892.521186440678)"/><ellipse cx="660" cy="892.521186440678" rx="88" ry="30" fill="#34b765" transform="rotate(28 660 892.521186440678)"/><ellipse cx="540" cy="789.0254237288136" rx="80" ry="28" fill="#2aa257" transform="rotate(-28 540 789.0254237288136)"/><ellipse cx="660" cy="789.0254237288136" rx="80" ry="28" fill="#34b765" transform="rotate(28 660 789.0254237288136)"/><ellipse cx="540" cy="685.5296610169491" rx="72" ry="25" fill="#2aa257" transform="rotate(-28 540 685.5296610169491)"/><ellipse cx="660" cy="685.5296610169491" rx="72" ry="25" fill="#34b765" transform="rotate(28 660 685.5296610169491)"/>
+  <circle cx="639" cy="582" r="27" fill="#a855f7" opacity="0.9"/><circle cx="627" cy="609" r="27" fill="#a855f7" opacity="0.9"/><circle cx="600" cy="621" r="27" fill="#a855f7" opacity="0.9"/><circle cx="573" cy="609" r="27" fill="#a855f7" opacity="0.9"/><circle cx="561" cy="582" r="27" fill="#a855f7" opacity="0.9"/><circle cx="573" cy="555" r="27" fill="#a855f7" opacity="0.9"/><circle cx="600" cy="543" r="27" fill="#a855f7" opacity="0.9"/><circle cx="627" cy="555" r="27" fill="#a855f7" opacity="0.9"/><circle cx="600" cy="582.0338983050848" r="24" fill="#fde68a"/>
+  <text x="60" y="100" font-family="system-ui, sans-serif" font-size="46" font-weight="800" fill="#ffffff" opacity="0.92">FRAME 44 / 60</text>
+  <text x="60" y="158" font-family="system-ui, sans-serif" font-size="34" font-weight="700" fill="#a855f7">FASE 05 · La Flor</text>
+  <text x="60" y="1540" font-family="system-ui, sans-serif" font-size="28" font-weight="600" fill="#ffffff" opacity="0.4">PLACEHOLDER — reemplazar por frames reales</text>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1600" viewBox="0 0 1200 1600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#06281a"/>
+      <stop offset="1" stop-color="#0c4429"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1600" fill="url(#bg)"/>
+  <ellipse cx="600" cy="1420" rx="540" ry="80" fill="#3a2a16"/>
+  <ellipse cx="600" cy="1410" rx="540" ry="64" fill="#4a3620"/>
+  
+  <path d="M600 1410 L600 353" stroke="#2fae5e" stroke-width="25" stroke-linecap="round"/>
+  <ellipse cx="540" cy="1304.2881355932204" rx="121" ry="42" fill="#2aa257" transform="rotate(-28 540 1304.2881355932204)"/><ellipse cx="660" cy="1304.2881355932204" rx="121" ry="42" fill="#34b765" transform="rotate(28 660 1304.2881355932204)"/><ellipse cx="540" cy="1198.5762711864406" rx="114" ry="40" fill="#2aa257" transform="rotate(-28 540 1198.5762711864406)"/><ellipse cx="660" cy="1198.5762711864406" rx="114" ry="40" fill="#34b765" transform="rotate(28 660 1198.5762711864406)"/><ellipse cx="540" cy="1092.864406779661" rx="108" ry="37" fill="#2aa257" transform="rotate(-28 540 1092.864406779661)"/><ellipse cx="660" cy="1092.864406779661" rx="108" ry="37" fill="#34b765" transform="rotate(28 660 1092.864406779661)"/><ellipse cx="540" cy="987.1525423728814" rx="101" ry="35" fill="#2aa257" transform="rotate(-28 540 987.1525423728814)"/><ellipse cx="660" cy="987.1525423728814" rx="101" ry="35" fill="#34b765" transform="rotate(28 660 987.1525423728814)"/><ellipse cx="540" cy="881.4406779661017" rx="95" ry="33" fill="#2aa257" transform="rotate(-28 540 881.4406779661017)"/><ellipse cx="660" cy="881.4406779661017" rx="95" ry="33" fill="#34b765" transform="rotate(28 660 881.4406779661017)"/><ellipse cx="540" cy="775.728813559322" rx="88" ry="30" fill="#2aa257" transform="rotate(-28 540 775.728813559322)"/><ellipse cx="660" cy="775.728813559322" rx="88" ry="30" fill="#34b765" transform="rotate(28 660 775.728813559322)"/><ellipse cx="540" cy="670.0169491525423" rx="81" ry="28" fill="#2aa257" transform="rotate(-28 540 670.0169491525423)"/><ellipse cx="660" cy="670.0169491525423" rx="81" ry="28" fill="#34b765" transform="rotate(28 660 670.0169491525423)"/><ellipse cx="540" cy="564.3050847457628" rx="75" ry="26" fill="#2aa257" transform="rotate(-28 540 564.3050847457628)"/><ellipse cx="660" cy="564.3050847457628" rx="75" ry="26" fill="#34b765" transform="rotate(28 660 564.3050847457628)"/><ellipse cx="540" cy="458.5932203389832" rx="68" ry="24" fill="#2aa257" transform="rotate(-28 540 458.5932203389832)"/><ellipse cx="660" cy="458.5932203389832" rx="68" ry="24" fill="#34b765" transform="rotate(28 660 458.5932203389832)"/>
+  <circle cx="670" cy="353" r="48" fill="#14b8a6" opacity="0.9"/><circle cx="649" cy="402" r="48" fill="#14b8a6" opacity="0.9"/><circle cx="600" cy="423" r="48" fill="#14b8a6" opacity="0.9"/><circle cx="551" cy="402" r="48" fill="#14b8a6" opacity="0.9"/><circle cx="530" cy="353" r="48" fill="#14b8a6" opacity="0.9"/><circle cx="551" cy="304" r="48" fill="#14b8a6" opacity="0.9"/><circle cx="600" cy="283" r="48" fill="#14b8a6" opacity="0.9"/><circle cx="649" cy="304" r="48" fill="#14b8a6" opacity="0.9"/><circle cx="600" cy="352.8813559322034" r="44" fill="#fde68a"/>
+  <text x="60" y="100" font-family="system-ui, sans-serif" font-size="46" font-weight="800" fill="#ffffff" opacity="0.92">FRAME 57 / 60</text>
+  <text x="60" y="158" font-family="system-ui, sans-serif" font-size="34" font-weight="700" fill="#14b8a6">FASE 06 · Extracción</text>
+  <text x="60" y="1540" font-family="system-ui, sans-serif" font-size="28" font-weight="600" fill="#ffffff" opacity="0.4">PLACEHOLDER — reemplazar por frames reales</text>
+</svg>

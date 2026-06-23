@@ -25,19 +25,24 @@ exacto de un endpoint, leer `README.md`.**
 
 ## Arrancar en desarrollo
 
+> ⚠️ **Node 20 o 22 LTS** (host). Con **Node 24 el CLI de Medusa rompe** — levantá todo por Docker
+> (`docker compose up -d --build`) y corré cada paso como `docker compose exec medusa npx medusa ...`.
+
 ```bash
 npm install
 cp .env.template .env        # completar DATABASE_URL, JWT_SECRET, COOKIE_SECRET (openssl rand -hex 32)
-# Postgres + Redis + Mailpit corriendo (docker-compose.yml los trae, o local):
-docker compose up -d postgres redis mailpit
+docker compose up -d postgres redis mailpit            # Postgres + Redis + Mailpit
 npm run db:migrate
+npx medusa user -e admin@coopehemp.cr -p Admin1234!    # crear admin (no se crea solo)
+# Seeds + publishable key — SIN esto la tienda sale vacía:
+npx medusa exec ./src/scripts/seed.ts                  # blog + newsletter
+npx medusa exec ./src/scripts/seed-commerce.ts         # productos, sales channel, inventario
+npx medusa exec ./src/scripts/setup-store.ts           # regiones, envío, payment provider
+npx medusa exec ./src/scripts/create-publishable-key.ts# pk_... + la vincula al sales channel
 npm run dev                  # http://localhost:9000  (admin: http://localhost:9000/app)
 ```
 
-Crear publishable key para el frontend:
-```bash
-npx medusa exec ./src/scripts/create-publishable-key.ts
-```
+La `create-publishable-key.ts` imprime la `pk_...` → va al `.env.local` del frontend.
 
 Otros: `npm run build` / `npm run start` (prod), `npm run db:generate`, `npm run db:rollback`.
 `docker-compose.yml` levanta el stack completo (Postgres + Redis + Mailpit + Medusa) para producción

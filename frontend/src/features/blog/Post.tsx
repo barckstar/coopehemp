@@ -76,7 +76,7 @@ const MD_COMPONENTS: React.ComponentProps<typeof ReactMarkdown>['components'] = 
 export default function BlogPost() {
     useScrollToTop();
     const { slug } = useParams<{ slug: string }>();
-    const { lang } = useTranslation();
+    const { t, lang } = useTranslation();
     const navigate = useNavigate();
 
     const [post, setPost] = useState<BlogPostFull | null>(null);
@@ -94,11 +94,12 @@ export default function BlogPost() {
 
     useEffect(() => {
         if (!slug) return;
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- estado de carga al iniciar el fetch
         setLoading(true);
         setError('');
         getBlogPost(slug, lang)
             .then(setPost)
-            .catch(() => setError('Artículo no encontrado.'))
+            .catch(() => setError(t('blog.not_found')))
             .finally(() => setLoading(false));
     }, [slug, lang]);
 
@@ -126,9 +127,9 @@ export default function BlogPost() {
     // ── Error ────────────────────────────────────────────────────────────────
     if (error || !post) return (
         <div className="min-h-screen flex flex-col items-center justify-center gap-6 text-center px-4">
-            <p className="text-2xl font-bold text-gray-700">{error || 'Artículo no disponible'}</p>
+            <p className="text-2xl font-bold text-gray-700">{error || t('blog.unavailable')}</p>
             <Link to="/blog" className="inline-flex items-center gap-2 text-coope-green-600 font-semibold hover:underline">
-                <ArrowLeft size={16} /> Volver al blog
+                <ArrowLeft size={16} /> {t('blog.back_to_blog')}
             </Link>
         </div>
     );
@@ -151,7 +152,7 @@ export default function BlogPost() {
                     onClick={() => navigate(-1)}
                     className="absolute top-6 left-4 md:left-8 flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-white/30 transition-colors"
                 >
-                    <ArrowLeft size={14} /> Blog
+                    <ArrowLeft size={14} /> {t('blog.back_short')}
                 </button>
 
                 {/* Category badge */}
@@ -190,7 +191,7 @@ export default function BlogPost() {
                     className="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-coope-green-600 transition-colors"
                 >
                     {copied ? <Check size={14} className="text-coope-green-500" /> : <Share2 size={14} />}
-                    {copied ? 'Link copiado' : 'Compartir'}
+                    {copied ? t('blog.copied') : t('blog.share')}
                 </button>
             </div>
 
@@ -216,22 +217,22 @@ export default function BlogPost() {
             <div className="bg-coope-green-900 text-white py-14 px-4 mt-8">
                 <div className="max-w-2xl mx-auto text-center">
                     <p className="text-coope-green-300 text-sm font-semibold tracking-widest uppercase mb-3">CoopeHemp R.L.</p>
-                    <h2 className="text-2xl font-bold mb-4">¿Te interesa el cáñamo sostenible?</h2>
+                    <h2 className="text-2xl font-bold mb-4">{t('blog.post_cta_title')}</h2>
                     <p className="text-coope-green-100 mb-8 max-w-lg mx-auto">
-                        Somos una cooperativa costarricense de productores. Contáctanos para conocer más.
+                        {t('blog.post_cta_desc')}
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Link
                             to="/blog"
                             className="inline-flex items-center gap-2 border border-white/30 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-white/10 transition-colors"
                         >
-                            <ArrowLeft size={14} /> Más artículos
+                            <ArrowLeft size={14} /> {t('blog.more_articles')}
                         </Link>
                         <Link
                             to="/contacto"
                             className="inline-flex items-center gap-2 bg-coope-green-500 hover:bg-coope-green-400 text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-colors"
                         >
-                            Contáctanos
+                            {t('blog.post_cta_contact')}
                         </Link>
                     </div>
                 </div>

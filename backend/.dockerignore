@@ -1,0 +1,26 @@
+# No copiar al contexto/imagen: el contenedor hace su propio npm ci (binarios Linux)
+node_modules
+.medusa
+dist
+build
+
+# Secretos y env (se inyectan vía env_file en runtime, no se hornean en la imagen)
+.env
+.env.*
+
+# Git / IDE / logs / OS
+.git
+.gitignore
+*.log
+npm-debug.log*
+.DS_Store
+.vscode
+.idea
+
+# Docs/infra que no hacen falta en la imagen
+README.md
+GUIA_USUARIO.md
+CLAUDE.md
+docker-compose.yml
+Dockerfile
+.dockerignore

@@ -34,7 +34,7 @@ export async function PUT(req: MedusaRequest, res: MedusaResponse) {
   }
 
   try {
-    const [post] = await blogService.updateBlogPosts({ id: req.params.id }, updateData)
+    const post = await blogService.updateBlogPosts({ id: req.params.id }, updateData)
     res.json({ post })
   } catch {
     res.status(404).json({ message: "Post no encontrado" })

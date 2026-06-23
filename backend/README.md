@@ -104,7 +104,7 @@ las tablas y los métodos CRUD básicos a través de `MedusaService`.
 
 | Herramienta | Versión mínima | Notas |
 |---|---|---|
-| Node.js | 20 LTS | Usa `nvm use 20` si tienes múltiples versiones |
+| Node.js | 20 o 22 LTS | ⚠️ **Node 24 NO funciona** — rompe el CLI de Medusa (`ERR_UNSUPPORTED_NODE_MODULES_TYPE_STRIPPING`). Usá `nvm use 20`/`22`, o corré todo por Docker (§6), que usa node:20 dentro del contenedor. |
 | npm | 10+ | Incluido con Node 20 |
 | Docker | 24+ | Solo necesario para el stack completo |
 | Docker Compose | v2 (plugin) | `docker compose` (sin guión) |
@@ -131,6 +131,10 @@ en `.gitignore`.
 Este modo usa Node.js directamente con hot-reload, más cómodo para iterar.  
 Solo los servicios de infraestructura (Postgres, Redis, Mailpit) corren en Docker.
 
+> ⚠️ **Requiere Node 20 o 22 LTS** (corre Medusa en el host). Con **Node 24 falla**. Si estás en
+> Node 24, usá el modo Docker (§6) con: `docker compose up -d --build` y luego cada paso de abajo
+> como `docker compose exec medusa npx medusa ...`.
+
 ```bash
 # 1. Instalar dependencias
 npm install
@@ -142,7 +146,17 @@ docker compose up postgres redis mailpit -d
 npm run db:generate
 npm run db:migrate
 
-# 4. Arrancar servidor con hot-reload
+# 4. Crear el usuario admin (Medusa v2 no lo crea solo)
+npx medusa user -e admin@coopehemp.cr -p Admin1234!
+
+# 5. Sembrar datos + generar/vincular la publishable key
+#    (SIN estos pasos la tienda sale vacía en el frontend)
+npx medusa exec ./src/scripts/seed.ts                     # blog + newsletter
+npx medusa exec ./src/scripts/seed-commerce.ts            # productos, precios, inventario, sales channel
+npx medusa exec ./src/scripts/setup-store.ts              # regiones, envío, payment provider (pp_system_default)
+npx medusa exec ./src/scripts/create-publishable-key.ts   # genera la pk_... y la VINCULA al sales channel
+
+# 6. Arrancar servidor con hot-reload
 npm run dev
 ```
 
@@ -152,11 +166,8 @@ npm run dev
 | Admin Panel | http://localhost:9000/app |
 | Mailpit (bandeja dev) | http://localhost:8025 |
 
-> **Primera vez en el admin:** Medusa v2 no crea el usuario admin automáticamente.
-> Usa el endpoint `POST /auth/user/emailpass/register` o ejecuta el seeder de Medusa:
-> ```bash
-> npx medusa user -e admin@coopehemp.cr -p tu_contraseña
-> ```
+> La `create-publishable-key.ts` imprime la `pk_...` — copiala al `.env.local` del frontend
+> (`VITE_MEDUSA_PUBLISHABLE_KEY`).
 
 ---
 

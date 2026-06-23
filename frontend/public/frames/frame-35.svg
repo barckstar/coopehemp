@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1600" viewBox="0 0 1200 1600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#06281a"/>
+      <stop offset="1" stop-color="#0c4429"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1600" fill="url(#bg)"/>
+  <ellipse cx="600" cy="1420" rx="540" ry="80" fill="#3a2a16"/>
+  <ellipse cx="600" cy="1410" rx="540" ry="64" fill="#4a3620"/>
+  
+  <path d="M600 1410 L600 741" stroke="#2fae5e" stroke-width="21" stroke-linecap="round"/>
+  <ellipse cx="540" cy="1298.446327683616" rx="121" ry="42" fill="#2aa257" transform="rotate(-28 540 1298.446327683616)"/><ellipse cx="660" cy="1298.446327683616" rx="121" ry="42" fill="#34b765" transform="rotate(28 660 1298.446327683616)"/><ellipse cx="540" cy="1186.8926553672316" rx="110" ry="38" fill="#2aa257" transform="rotate(-28 540 1186.8926553672316)"/><ellipse cx="660" cy="1186.8926553672316" rx="110" ry="38" fill="#34b765" transform="rotate(28 660 1186.8926553672316)"/><ellipse cx="540" cy="1075.3389830508474" rx="99" ry="34" fill="#2aa257" transform="rotate(-28 540 1075.3389830508474)"/><ellipse cx="660" cy="1075.3389830508474" rx="99" ry="34" fill="#34b765" transform="rotate(28 660 1075.3389830508474)"/><ellipse cx="540" cy="963.7853107344633" rx="88" ry="30" fill="#2aa257" transform="rotate(-28 540 963.7853107344633)"/><ellipse cx="660" cy="963.7853107344633" rx="88" ry="30" fill="#34b765" transform="rotate(28 660 963.7853107344633)"/><ellipse cx="540" cy="852.2316384180791" rx="77" ry="27" fill="#2aa257" transform="rotate(-28 540 852.2316384180791)"/><ellipse cx="660" cy="852.2316384180791" rx="77" ry="27" fill="#34b765" transform="rotate(28 660 852.2316384180791)"/>
+  
+  <text x="60" y="100" font-family="system-ui, sans-serif" font-size="46" font-weight="800" fill="#ffffff" opacity="0.92">FRAME 35 / 60</text>
+  <text x="60" y="158" font-family="system-ui, sans-serif" font-size="34" font-weight="700" fill="#94a3b8">FASE 04 · Agramiza / Hurd</text>
+  <text x="60" y="1540" font-family="system-ui, sans-serif" font-size="28" font-weight="600" fill="#ffffff" opacity="0.4">PLACEHOLDER — reemplazar por frames reales</text>
+</svg>

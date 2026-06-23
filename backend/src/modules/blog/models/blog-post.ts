@@ -12,13 +12,13 @@ const BlogPost = model.define("blog_post", {
   slug: model.text(),
   cover_image: model.text().nullable(),
   // Additional images: array of URLs, max 8 recommended
-  gallery: model.json<string[]>().default([]),
+  gallery: model.json().default([] as any),
   category: model.text(),
   author_name: model.text(),
   is_published: model.boolean().default(false),
   published_at: model.dateTime().nullable(),
   // [{locale, title, excerpt, content}] — content stored as Markdown
-  translations: model.json<BlogTranslation[]>().default([]),
+  translations: model.json().default([] as any),
 })
 
 export default BlogPost

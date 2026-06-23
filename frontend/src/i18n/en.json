@@ -65,7 +65,22 @@
     "no_shipping": "No shipping options available for this address.",
     "order_summary": "Order summary",
     "shipping": "Shipping",
-    "total": "Estimated total"
+    "total": "Estimated total",
+    "no_charge_title": "No immediate charge",
+    "no_charge_desc": "Once you confirm, we'll register your order. A CoopeHemp advisor will contact you within 24–48 h to coordinate payment and delivery.",
+    "confirm_order": "Confirm order",
+    "empty_desc": "Add products to continue.",
+    "plus_shipping": "+ shipping",
+    "contact_btn": "Contact us",
+    "ph_first": "John",
+    "ph_last": "Doe",
+    "ph_email": "john@example.com",
+    "ph_phone": "+506 8888-8888",
+    "ph_address": "10th St, Los Yoses",
+    "ph_address2": "Apt 2B",
+    "ph_city": "San José",
+    "ph_province": "San José",
+    "ph_postal": "10101"
   },
   "footer": {
     "tagline": "Pioneering sustainable hemp production in Costa Rica. We connect producers, industry and community to build a greener future.",
@@ -75,7 +90,8 @@
     "newsletter_desc": "Subscribe to receive the latest cooperative news and updates.",
     "newsletter_placeholder": "Your email address",
     "newsletter_btn": "Subscribe",
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "location": "San José, Costa Rica"
   },
   "home": {
     "hero_title1": "Driving the sustainable",
@@ -104,7 +120,135 @@
     "cta_btn": "Contact Us Now",
     "blog_label": "From the Blog",
     "blog_title": "Latest in Hemp",
-    "blog_all": "View all articles"
+    "blog_all": "View all articles",
+    "anatomy": "Hemp Anatomy",
+    "phase": "Phase",
+    "scroll": "scroll",
+    "keep_scrolling": "Keep scrolling to explore all {{n}} stages",
+    "hero_tag": "Costa Rica · CoopeHemp R.L.",
+    "hero_cta_products": "View Products",
+    "showcase_label": "CoopeHemp Store",
+    "showcase_title": "Products that transform your wellbeing",
+    "showcase_sub": "Made with 100% organic hemp grown by our members in Costa Rica.",
+    "showcase_all": "View full catalog",
+    "price_ask": "Ask for price",
+    "category_fallback": "Product",
+    "buy": "Buy",
+    "added": "Added!",
+    "project_label": "Project · CoopeHemp Members",
+    "medical_label": "Medicinal Hemp",
+    "medical_title1": "The therapeutic power",
+    "medical_title2": "of CBD",
+    "medical_p1": "The endocannabinoid system — present in every human being — regulates pain, mood, sleep and the immune response. CBD activates its receptors without causing dependence or psychoactive effects.",
+    "medical_p2": "Our full-spectrum oils preserve all the cannabinoids, terpenes and flavonoids of the flower, boosting the \"entourage effect\" for superior results.",
+    "medical_badge1": "+20,000 scientific studies",
+    "medical_badge2": "back the benefits of CBD",
+    "medical_cta": "View therapeutic oils",
+    "medical_items": {
+      "antiinflamatorio": { "title": "Anti-inflammatory", "desc": "CBD inhibits inflammatory pathways without gastrointestinal side effects." },
+      "ansiolitico": { "title": "Natural anxiolytic", "desc": "Reduces cortisol and enhances the nervous system's GABA receptors." },
+      "neuroprotector": { "title": "Neuroprotective", "desc": "CBG shows promising effects in neuroprotection and cell regeneration." },
+      "sin-psicoactividad": { "title": "No psychoactivity", "desc": "THC below 0.3%. All the benefits, no psychoactive effects." }
+    },
+    "cosmetic_label": "Natural Cosmetics",
+    "cosmetic_title1": "Your skin deserves",
+    "cosmetic_title2": "the best of nature",
+    "cosmetic_p1": "Hemp seed oil has a lipid profile that mimics the skin barrier's natural lipids, making it exceptionally compatible with human skin — it hydrates without clogging or disrupting the skin microbiome.",
+    "cosmetic_p2": "Our cosmetic line is free of parabens, sulfates and silicones. Only natural actives that respect your skin and the planet.",
+    "cosmetic_cta": "Explore cosmetic line",
+    "cosmetic_benefits": [
+      "Mimics the skin's natural lipids (sebum)",
+      "Regulates oil production — ideal for combination skin",
+      "Rich in vitamin E: a powerful antioxidant",
+      "Non-comedogenic: doesn't clog pores",
+      "Suitable for sensitive skin, eczema and psoriasis"
+    ],
+    "hempcrete_title1": "Hempcrete:",
+    "hempcrete_title2": "Building with nature",
+    "hempcrete_p1": "Hemp hurd (the core of the hemp stalk) mixed with hydraulic lime produces Hempcrete: a biocomposite building material that is lighter than concrete, permanently sequesters carbon and improves over time.",
+    "hempcrete_p2": "While conventional concrete emits CO₂, Hempcrete captures it. It is the only building material with a negative carbon footprint, growing stronger every year thanks to the lime's natural mineralization.",
+    "hempcrete_cta": "Discover the project",
+    "hempcrete_stats": [
+      { "value": "−1.6 t", "label": "CO₂ captured per m³ per year" },
+      { "value": "3×", "label": "Lighter than concrete" },
+      { "value": "100%", "label": "Biodegradable and recyclable" },
+      { "value": "0", "label": "Toxins or VOCs emitted" }
+    ],
+    "hempcrete_cards": [
+      { "icon": "🌿", "title": "Hemp hurd", "desc": "The crushed woody core of the stalk — 70% of the plant's biomass — is mixed with lime to create the compound." },
+      { "icon": "🏗️", "title": "Natural carbonation", "desc": "Over time the lime reacts with CO₂ in the air and the silica in the hurd, turning into ever-harder stone." },
+      { "icon": "♻️", "title": "Full life cycle", "desc": "At the end of its life, Hempcrete can be composted, becoming fertilizer for new hemp crops." }
+    ],
+    "mission_caption": "More than 50 producing families",
+    "cta_store": "Store",
+    "stages": {
+      "semilla": {
+        "title": "The Seed",
+        "subtitle": "The most complete superfood on the planet",
+        "description": "It all starts here. Hemp seed concentrates complete protein with all 9 essential amino acids and omegas 3, 6 and 9 in the ideal ratio for human metabolism — the same as breast milk.",
+        "facts": [
+          ">30% highly bioavailable protein",
+          "Omega 3:6:9 in an optimal 1:3:1 ratio",
+          "Source of zinc, magnesium and iron",
+          "Gluten-free · vegan-friendly"
+        ]
+      },
+      "raiz": {
+        "title": "Root & Soil",
+        "subtitle": "Guardian of the ecosystem",
+        "description": "Roots reach 2+ meters deep, breaking up compacted soils and absorbing heavy metals through active phytoremediation. Hemp needs no pesticides: its natural chemistry repels pests.",
+        "facts": [
+          "Phytoremediation: absorbs heavy metals",
+          "No pesticides or herbicides",
+          "Improves soil biodiversity",
+          "Captures CO₂ even at rest"
+        ]
+      },
+      "fibra-bast": {
+        "title": "Bast Fiber",
+        "subtitle": "Nature's strongest fiber",
+        "description": "The stalk's bark produces long, strong fibers called bast. They are the basis for technical textiles, industrial ropes, high-quality paper and bioengineering composites for the automotive industry.",
+        "facts": [
+          "3× stronger than cotton",
+          "Naturally antibacterial textiles",
+          "Paper without felling a tree",
+          "Bioplastics and engineering composites"
+        ]
+      },
+      "agramiza": {
+        "title": "Hurd / Shiv",
+        "subtitle": "The raw material of Hempcrete",
+        "description": "The woody inner core of the stalk is mixed with hydraulic lime to produce Hempcrete: a building material that grows stronger over time, is fireproof, antibacterial and permanently captures carbon.",
+        "facts": [
+          "Captures 1.6 t of CO₂ per m³/year",
+          "Superior thermal and acoustic insulation",
+          "Fireproof and pest-resistant",
+          "Flagship project of our members"
+        ]
+      },
+      "flor": {
+        "title": "The Flower",
+        "subtitle": "Nature's most complex pharmacy",
+        "description": "The flower's trichomes synthesize over 100 different cannabinoids. CBD, CBG, CBN and terpenes work in synergy — the \"entourage effect\" — exponentially boosting every therapeutic benefit.",
+        "facts": [
+          "CBD: anti-inflammatory and anxiolytic",
+          "CBG: emerging neuroprotectant",
+          "Terpenes: therapeutic aromatherapy",
+          "THC <0.3% — no psychoactivity"
+        ]
+      },
+      "extraccion": {
+        "title": "Extraction & Products",
+        "subtitle": "From the plant to the end consumer",
+        "description": "Through supercritical CO₂ extraction, cold pressing and certified artisanal processes, we transform every part of the plant into the highest-quality products for health, cosmetics and construction.",
+        "facts": [
+          "Full-spectrum CBD oils",
+          "Natural creams and cosmetics",
+          "Hempcrete for sustainable construction",
+          "Superfoods and sports supplements"
+        ]
+      }
+    }
   },
   "about": {
     "hero_label": "About Us",
@@ -140,7 +284,8 @@
     "cta_title": "Be part of the green revolution",
     "cta_sub": "Whether you are a producer, investor, or consumer, there is a place for you in CoopeHemp.",
     "cta_contact": "Contact Us",
-    "cta_products": "View Products"
+    "cta_products": "View Products",
+    "team_name_placeholder": "Full Name"
   },
   "products": {
     "hero_badge": "100% Organic & Sustainable",
@@ -149,7 +294,11 @@
     "wholesale_title": "Wholesale?",
     "wholesale_desc": "Join our distributor network and bring the best hemp products to your customers.",
     "wholesale_btn": "Contact Us",
-    "details_btn": "Details"
+    "details_btn": "Details",
+    "in_stock": "In stock",
+    "retry": "Retry",
+    "price_ask": "Ask for price",
+    "category_fallback": "Product"
   },
   "blog": {
     "title": "Blog & News",
@@ -158,7 +307,26 @@
     "newsletter_title": "Subscribe to our Newsletter",
     "newsletter_desc": "Receive the latest cooperative news and educational articles directly in your inbox.",
     "newsletter_placeholder": "Your email address",
-    "newsletter_btn": "Subscribe"
+    "newsletter_btn": "Subscribe",
+    "load_error": "We couldn't load the articles. Check your connection.",
+    "sub_error": "Subscription failed.",
+    "all": "All",
+    "retry": "Retry",
+    "empty": "No posts found.",
+    "prev": "Prev",
+    "next": "Next",
+    "sub_success": "Successfully subscribed!",
+    "sub_desc": "You'll soon receive news from CoopeHemp.",
+    "back_short": "Blog",
+    "not_found": "Article not found.",
+    "unavailable": "Article unavailable",
+    "back_to_blog": "Back to blog",
+    "copied": "Link copied",
+    "share": "Share",
+    "post_cta_title": "Interested in sustainable hemp?",
+    "post_cta_desc": "We're a Costa Rican cooperative of producers. Contact us to learn more.",
+    "more_articles": "More articles",
+    "post_cta_contact": "Contact us"
   },
   "contact": {
     "hero_title": "Let's Talk",
@@ -179,7 +347,18 @@
     "community_label": "Community",
     "community_title": "Growing Together",
     "community_desc": "Hemp is not just a crop, it is an opportunity to strengthen our communities and regenerate our land.",
-    "community_link": "Know our story"
+    "community_link": "Know our story",
+    "email_label": "Email",
+    "phone_label": "Phone",
+    "location_label": "Location",
+    "location_value": "Costa Rica",
+    "location_sub": "Headquarters",
+    "sent_title": "Message sent!",
+    "sent_desc": "Our team will get back to you shortly.",
+    "send_another": "Send another message",
+    "market_estimated": "Estimate",
+    "market_projection": "Projection",
+    "market_future": "Future"
   },
   "map": {
     "title": "Dispenser Machine Map",
@@ -192,6 +371,7 @@
     "status_active": "Active",
     "status_soon": "Coming Soon",
     "no_results": "No locations found with that criteria.",
+    "all_provinces": "All provinces",
     "click_hint": "Click a marker to see details",
     "popup_address": "Address",
     "popup_hours": "Hours",
@@ -237,5 +417,21 @@
     "cta_title": "Need more information?",
     "cta_sub": "If you require additional documents or have questions about our operations, feel free to contact us.",
     "cta_btn": "Contact the Team"
+  },
+  "notfound": {
+    "title": "Page not found",
+    "message": "The page you're looking for doesn't exist or was moved.",
+    "back": "Back to home"
+  },
+  "error": {
+    "title": "Something went wrong",
+    "message": "An unexpected error occurred. Try reloading the page.",
+    "reload": "Reload"
+  },
+  "a11y": {
+    "menu": "Open menu",
+    "close": "Close",
+    "increase": "Increase quantity",
+    "decrease": "Decrease quantity"
   }
 }

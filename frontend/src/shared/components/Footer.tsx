@@ -73,7 +73,7 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <MapPin size={16} className="text-coope-green-500 mt-0.5 shrink-0" />
-                <span className="text-sm">San José, Costa Rica</span>
+                <span className="text-sm">{t('footer.location')}</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={16} className="text-coope-green-500 shrink-0" />
