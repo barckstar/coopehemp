@@ -298,7 +298,8 @@
     "in_stock": "In stock",
     "retry": "Retry",
     "price_ask": "Ask for price",
-    "category_fallback": "Product"
+    "category_fallback": "Product",
+    "error": "We couldn't load the products right now. Please try again in a moment."
   },
   "blog": {
     "title": "Blog & News",

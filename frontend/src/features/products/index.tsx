@@ -40,58 +40,6 @@ interface DisplayProduct {
     category: string;
 }
 
-// ─── Hardcoded fallback ───────────────────────────────────────────────────────
-// Used when Medusa returns no products (backend down or products not linked
-// to sales channel yet). Remove once products are fully configured in admin.
-
-const FALLBACK_PRODUCTS: DisplayProduct[] = [
-    {
-        id: 1,
-        name: 'CBD Pre-rolls (5 pack)',
-        description: 'Flores de cáñamo premium seleccionadas a mano, roladas en papel orgánico. Experiencia suave y natural.',
-        price: '$15.00',
-        priceNumeric: 15,
-        image: '/productos/product-prerolls.jpg',
-        category: 'Fumables',
-    },
-    {
-        id: 2,
-        name: 'Bálsamo Calmante CBD',
-        description: 'Alivio tópico profundo para músculos y articulaciones. Formulado con cera de abeja y aceites esenciales.',
-        price: '$25.00',
-        priceNumeric: 25,
-        image: '/productos/product-cbd-balm.jpg',
-        category: 'Bienestar',
-    },
-    {
-        id: 3,
-        name: 'Té de Cáñamo Premium',
-        description: 'Infusión relajante rica en cannabinoides no psicoactivos. Ideal para reducir el estrés y mejorar el sueño.',
-        price: '$45.00',
-        priceNumeric: 45,
-        image: '/productos/product-hump-oil-tea.jpg',
-        category: 'Bebidas',
-    },
-    {
-        id: 4,
-        name: 'Crema Facial Anti-edad',
-        description: 'Hidratación profunda con poder antioxidante. Revitaliza tu piel con lo mejor de la naturaleza.',
-        price: '$30.00',
-        priceNumeric: 30,
-        image: '/productos/product-beauty-cream.jpg',
-        category: 'Belleza',
-    },
-    {
-        id: 5,
-        name: 'Cookies Artesanales CBD',
-        description: 'Deliciosas galletas horneadas con harina de cáñamo y chispas de chocolate. El snack saludable perfecto.',
-        price: '$12.00',
-        priceNumeric: 12,
-        image: '/productos/product-cookies.jpg',
-        category: 'Comestibles',
-    },
-];
-
 // ─── Map Medusa products → DisplayProduct ─────────────────────────────────────
 
 function fromMedusaProducts(products: MedusaProduct[], currency: string, t: (key: string) => string): DisplayProduct[] {
@@ -174,7 +122,6 @@ const Products = () => {
     const [products, setProducts] = useState<DisplayProduct[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const [fromMedusa, setFromMedusa] = useState(false);
 
     const fetchProducts = async () => {
         setLoading(true);
@@ -190,16 +137,11 @@ const Products = () => {
             if (raw.length > 0) {
                 const currency = raw[0]?.variants?.[0]?.calculated_price?.currency_code ?? region?.currency_code ?? 'crc';
                 setProducts(fromMedusaProducts(raw, currency, t));
-                setFromMedusa(true);
             } else {
-                // Products exist in DB but not linked to sales channel yet
-                setProducts(FALLBACK_PRODUCTS);
-                setFromMedusa(false);
+                setError(t('products.error'));
             }
         } catch {
-            // Backend unreachable — use fallback silently
-            setProducts(FALLBACK_PRODUCTS);
-            setFromMedusa(false);
+            setError(t('products.error'));
         } finally {
             setLoading(false);
         }
@@ -284,8 +226,7 @@ const Products = () => {
                                     <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-neutral-900 shadow-sm">
                                         {product.category}
                                     </div>
-                                    {/* Medusa badge — shows when data is live */}
-                                    {fromMedusa && product.variantId && (
+                                    {product.variantId && (
                                         <div className="absolute top-4 left-4 bg-coope-green-600/90 backdrop-blur-sm px-2 py-0.5 rounded-full text-[10px] font-bold text-white">
                                             {t('products.in_stock')}
                                         </div>
