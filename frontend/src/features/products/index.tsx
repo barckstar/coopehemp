@@ -31,6 +31,7 @@ const PRODUCTS_LD = {
 
 interface DisplayProduct {
     id: number;
+    handle: string;
     variantId?: string;    // Medusa variant UUID — present when fetched from API
     name: string;
     description: string;
@@ -58,6 +59,7 @@ function fromMedusaProducts(products: MedusaProduct[], currency: string, t: (key
 
         return {
             id: idx + 1,
+            handle: p.handle,
             variantId: variant?.id,
             name: p.title,
             description: p.description ?? '',
@@ -216,13 +218,15 @@ const Products = () => {
                                 className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group ring-1 ring-neutral-100 flex flex-col"
                             >
                                 <div className="relative h-64 overflow-hidden bg-neutral-100">
-                                    <img
-                                        loading="lazy"
-                                        src={product.image}
-                                        alt={product.name}
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                        onError={(e) => { (e.target as HTMLImageElement).src = '/hemp-plant.jpg'; }}
-                                    />
+                                    <Link to={`/productos/${product.handle}`} className="block w-full h-full">
+                                        <img
+                                            loading="lazy"
+                                            src={product.image}
+                                            alt={product.name}
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                            onError={(e) => { (e.target as HTMLImageElement).src = '/hemp-plant.jpg'; }}
+                                        />
+                                    </Link>
                                     <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-neutral-900 shadow-sm">
                                         {product.category}
                                     </div>
@@ -236,7 +240,7 @@ const Products = () => {
                                 <div className="p-8 flex flex-col flex-grow">
                                     <div className="flex items-start justify-between mb-4">
                                         <h3 className="text-2xl font-bold text-neutral-900 group-hover:text-green-800 transition-colors">
-                                            {product.name}
+                                            <Link to={`/productos/${product.handle}`}>{product.name}</Link>
                                         </h3>
                                         <span className="text-lg font-bold text-green-700 shrink-0 ml-2">
                                             {product.price}

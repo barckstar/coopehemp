@@ -6,6 +6,7 @@ import Home from './features/home';
 // Home es eager (LCP); el resto carga lazy por ruta. El Suspense vive en MainLayout.
 const About = lazy(() => import('./features/about'));
 const Products = lazy(() => import('./features/products'));
+const ProductDetail = lazy(() => import('./features/products/Detail'));
 const VendingMap = lazy(() => import('./features/map'));
 const Directory = lazy(() => import('./features/directory'));
 const Transparency = lazy(() => import('./features/transparency'));
@@ -23,6 +24,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="productos" element={<Products />} />
+          <Route path="productos/:handle" element={<ProductDetail />} />
           <Route path="products" element={<Products />} />
           <Route path="mapa" element={<VendingMap />} />
           <Route path="directorio" element={<Directory />} />

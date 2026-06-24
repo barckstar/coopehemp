@@ -299,7 +299,10 @@
     "retry": "Retry",
     "price_ask": "Ask for price",
     "category_fallback": "Product",
-    "error": "We couldn't load the products right now. Please try again in a moment."
+    "error": "We couldn't load the products right now. Please try again in a moment.",
+    "quantity": "Quantity",
+    "specs": "Product details",
+    "back": "Back to catalog"
   },
   "blog": {
     "title": "Blog & News",

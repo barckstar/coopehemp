@@ -64,6 +64,8 @@ export interface MedusaProduct {
   variants: MedusaVariant[]
   collection_id: string | null
   tags: { value: string }[]
+  images?: { url: string }[]
+  options?: { id: string; title: string; values: { value: string }[] }[]
 }
 
 export interface MedusaVariant {
@@ -86,6 +88,15 @@ export async function getProducts(params?: {
   if (params?.region_id) q.set('region_id', params.region_id)
   q.set('fields', 'id,title,description,thumbnail,handle,tags.*,variants.*,variants.calculated_price')
   return storeFetch(`/products?${q.toString()}`)
+}
+
+export async function getProductByHandle(handle: string, region_id?: string): Promise<{ product: MedusaProduct | null }> {
+  const q = new URLSearchParams()
+  q.set('handle', handle)
+  if (region_id) q.set('region_id', region_id)
+  q.set('fields', 'id,title,description,thumbnail,handle,tags.*,images.*,options.*,options.values.*,variants.*,variants.calculated_price')
+  const { products } = await storeFetch<{ products: MedusaProduct[] }>(`/products?${q.toString()}`)
+  return { product: products[0] ?? null }
 }
 
 // ─── Regions ──────────────────────────────────────────────────────────────────
