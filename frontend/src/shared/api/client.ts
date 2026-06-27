@@ -8,6 +8,9 @@ export async function storeFetch<T>(path: string, options?: RequestInit): Promis
     ...options,
     headers: {
       'Content-Type': 'application/json',
+      // ngrok-free intercala una página de advertencia HTML en respuestas a navegadores;
+      // este header la salta para que las llamadas a la API devuelvan JSON. Inocuo fuera de ngrok.
+      'ngrok-skip-browser-warning': 'true',
       ...(PUB_KEY ? { 'x-publishable-api-key': PUB_KEY } : {}),
       ...options?.headers,
     },
