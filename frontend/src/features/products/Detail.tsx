@@ -6,6 +6,7 @@ import useScrollToTop from '../../shared/hooks/useScrollToTop';
 import { useSEO } from '../../shared/hooks/useSEO';
 import { useCart } from '../cart/CartContext';
 import { getProductByHandle, getRegions, type MedusaProduct, type MedusaVariant } from '../../shared/api/medusa-store';
+import { resolveImage } from '../../shared/lib/placeholder';
 
 const FALLBACK_IMG = '/hemp-plant.jpg';
 
@@ -99,7 +100,9 @@ export default function ProductDetail() {
         );
     }
 
-    const images = [product.thumbnail, ...(product.images?.map((i) => i.url) ?? [])].filter((x): x is string => !!x);
+    const images = [product.thumbnail, ...(product.images?.map((i) => i.url) ?? [])]
+        .filter((x): x is string => !!x)
+        .map((u) => resolveImage(u, product.title));
     const gallery = images.length ? images : [FALLBACK_IMG];
     const { num: priceNum, fmt: priceFmt } = formatPrice(variant, currency, t);
     const category = product.tags?.[0]?.value ?? t('products.category_fallback');

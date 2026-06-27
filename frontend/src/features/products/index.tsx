@@ -7,6 +7,7 @@ import useScrollToTop from '../../shared/hooks/useScrollToTop';
 import { useSEO } from '../../shared/hooks/useSEO';
 import { useCart } from '../cart/CartContext';
 import { getProducts, getRegions, type MedusaProduct } from '../../shared/api/medusa-store';
+import { resolveImage } from '../../shared/lib/placeholder';
 
 // ─── SEO structured data ──────────────────────────────────────────────────────
 
@@ -65,7 +66,7 @@ function fromMedusaProducts(products: MedusaProduct[], currency: string, t: (key
             description: p.description ?? '',
             price: priceFmt,
             priceNumeric: priceNum,
-            image: p.thumbnail ?? '/hemp-plant.jpg',
+            image: resolveImage(p.thumbnail, p.title),
             category: p.tags?.[0]?.value ?? t('products.category_fallback'),
         };
     });
